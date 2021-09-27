@@ -6,6 +6,11 @@ const orderSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    Description:{
+        type: String,
+        required: true
+    },
+
     DeliveryDate: {
         type: String,
         required: true

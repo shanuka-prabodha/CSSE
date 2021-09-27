@@ -10,7 +10,23 @@ router.route("/create").post((req,res)=>{
     }).catch((err)=>{
         console.log(err)
     })
+});
+
+
+router.route('/readOder').get(async(req,res)=>{
+    await Order.find()
+    .then((order)=>{
+        res.json(order)
+    })
+    .catch(error=>{
+        res.status(500).send(error.message);
+    })
 })
+
+
+
+
+
 
 
 module.exports=router;
