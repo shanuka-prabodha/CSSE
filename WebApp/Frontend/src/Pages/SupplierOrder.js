@@ -8,6 +8,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import SupplieReplyForm from "./SupplieReplyForm";
 
 const _ = require('underscore-contrib');
 const StyledTableCell = withStyles((theme) => ({
@@ -28,13 +29,18 @@ export default function SupplierOrder() {
     let [itemList2, setItemList2] = useState({});
 
     let items = []
-
+    const userId= "61532085ebf085108c3b9e68";
 
     useEffect(() => {
 
         function getOrderList() {
-            
-            axios.get("http://localhost:8020/reply/get-orders/61532085ebf085108c3b9e68")
+
+
+
+            // 61532085ebf085108c3b9e68
+            //6153205febf085108c3b9e66
+
+            axios.get(`http://localhost:8020/reply/get-orders/${userId}`)
                 .then((response) => {
                     setOrderList(response.data.data);
                     // console.log(response.data)
@@ -47,76 +53,91 @@ export default function SupplierOrder() {
         }
 
         getOrderList()
-        printorder()
+        // printorder()
 
     }, [])
 
 
-    function  printorder() {
+    // function  printorder() {
+    //
+    //     orderList.map((value) => {
+    //         // console.log(value)
+    //         axios.get(`http://localhost:8020/order/find/${value}`)
+    //             .then((response) => {
+    //                 setItemList(response.data);
+    //                 // setItemList(oldArray => [...oldArray, response.data]);
+    //                 items.push(response.data)
+    //                 console.log(setItemList)
+    //
+    //             })
+    //             .catch((error) => {
+    //                 alert(error)
+    //             })
+    //     })
+    //
+    //
+    //     // setItemList2 = {...itemList, itemList}
+    //     // items = itemList
+    //     //
+    //     console.log(items)
+    //     // console.log(itemList)
+    // }
 
-        orderList.map((value) => {
-            // console.log(value)
-            axios.get(`http://localhost:8020/order/find/${value}`)
-                .then((response) => {
-                    setItemList(response.data);
-                    // setItemList(oldArray => [...oldArray, response.data]);
-                    items.push(response.data)
-                    console.log(setItemList)
-
-                })
-                .catch((error) => {
-                    alert(error)
-                })
-        })
-
-
-        // setItemList2 = {...itemList, itemList}
-        // items = itemList
-        //
-        console.log(items)
-        // console.log(itemList)
-    }
-
+let count=0;
 
     return (
         <div>
 
             SUPPLIER
-            <button onClick={printorder}>Click here</button>
+            {/*<button onClick={printorder}>Click here</button>*/}
 
-            {
-                orderList.map((value) => (
-
-
-                    <TableContainer key={value} component={Paper}>
+            {/*{*/}
+            {/*    orderList.map((value) => (*/}
 
 
-                        <Table aria-label="simple table">
-                            <TableHead>
-                                <TableRow>
-                                    <StyledTableCell>ID</StyledTableCell>
-                                    <StyledTableCell>Quantity</StyledTableCell>
+            <TableContainer component={Paper}>
+
+
+                <Table aria-label="simple table">
+                    <TableHead>
+                        <TableRow>
+                            <StyledTableCell>ID</StyledTableCell>
+                            <StyledTableCell>Order Date</StyledTableCell>
+                            <StyledTableCell>Due Date</StyledTableCell>
+                            <StyledTableCell>Action</StyledTableCell>
+
+
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {
+                            orderList.map(orderList => (
+                                <TableRow key={orderList}>
+                                    {/*<TableCell>{orderList.ids}</TableCell>*/}
+                                    <TableCell>Order {count=count+1}</TableCell>
+                                    <TableCell>{orderList.oDate}</TableCell>
+                                    <TableCell>{orderList.dDate}</TableCell>
+                                    {/*<TableCell>{items.quantity}</TableCell>*/}
+                                    <TableCell>
+
+                                        <SupplieReplyForm
+                                            orderid = {orderList.ids}
+                                            supplierid={userId}
+
+                                    /></TableCell>
 
 
                                 </TableRow>
-                            </TableHead>
-                            <TableBody>
-                                {
-                                    items.map(items => (
-                                        <TableRow key={items._id}>
-                                            <TableCell>{items.itemName}</TableCell>
-                                            <TableCell>{items.quantity}</TableCell>
-                                        </TableRow>
-                                    ))
-                                }
+                            ))
+                        }
 
 
-                            </TableBody>
-                        </Table>
-                    </TableContainer>
+                    </TableBody>
+                </Table>
+            </TableContainer>
 
-                ))
-            }
+            {/*    ))*/}
+            {/*}*/}
 
 
         </div>

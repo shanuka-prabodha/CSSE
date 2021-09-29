@@ -45,6 +45,9 @@ const orderSchema = new mongoose.Schema({
     items: [{
         itemName: {type: mongoose.Schema.Types.ObjectId , required:false},
         quantity: {type: Number, required: false},
+        name: {type: String, required: false},
+        unitPrice: {type: String, required: false},
+        discription: {type: String, required: false},
     }],
 
 
