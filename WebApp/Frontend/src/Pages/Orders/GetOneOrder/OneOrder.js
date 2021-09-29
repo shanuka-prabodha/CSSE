@@ -13,7 +13,9 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import ButtonToolBar from "../MyComponents/ButtonBar/ButtonToolBar";
+import ButtonToolBar from "../../../MyComponents/ButtonBar/ButtonToolBar";
+import axios from "axios";
+import { useHistory } from "react-router-dom";
 
 function createData(code, name, desc, qnty, unit, price) {
     return { code, name, desc, qnty, unit, price };
@@ -38,9 +40,35 @@ const bull = (
     </Box>
 );
 
-const card = (
-    <React.Fragment>
-        <CardContent>
+export default function OneOrder(props) {
+    let history = useHistory();
+    console.log(props.items)
+
+
+    function setApproval(status){
+
+        const state ={
+            AdminApproval:status
+        }
+
+        axios.put(`http://localhost:8020/order/approve/${props.id}`,state).then((response)=>{
+                console.log(response)
+        }).catch((err)=>{
+            console.log(err)
+        })
+
+        
+        history.push("/approval")
+    }
+
+
+
+
+    return (
+        <Box sx={{ minWidth: 275 }}>
+            <Card variant="outlined">
+
+            <CardContent>
             <Row style={{ paddingLeft: "2%", paddingBottom: "10px", fontSize: "30px", fontWeight: "bold" }}>Purchase Order Requested</Row>
             <Row style={{ paddingLeft: "2%" }}>
                 <ButtonToolBar
@@ -70,8 +98,8 @@ const card = (
                 PURCHASE ORDER PO-P0014
             </Typography>
             <Typography style={{ paddingLeft: "70%" }}>
-                <label>Approval Status</label>
-                <label> Pending</label>
+                <label>Approval Status </label>
+                <label style={{marginLeft: "10px", padding: "1px" , fontWeight:"bold"}}> {props.status}</label>
             </Typography>
             <Typography style={{ paddingLeft: "70%" }}>
                 <label>Requested by</label>
@@ -88,28 +116,24 @@ const card = (
                     <TableBody>
                         <tr>
                             <td>Due Date</td>
-                            <td>23/08/2021</td>
+                            <td>{props.duedate}</td>
                         </tr>
                         <tr>
                             <td>Submitted Date</td>
-                            <td>19/08/2021</td>
+                            <td>{props.subdate}</td>
                         </tr>
                         <tr>
                             <td>Description</td>
-                            <td>These goods are on high priority for suit A</td>
+                            <td>{props.desc}</td>
                         </tr>
                         <tr>
                             <td>Total Items</td>
-                            <td>19</td>
+                            <td>{props.items.length}</td>
                         </tr>
                     </TableBody>
                 </Table>
             </Typography>
 
-            <Typography style={{ float: "right" }}>
-                <Button>Approve</Button>
-                <Button>Decline</Button>
-            </Typography>
 
             <TableContainer component={Paper}>
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -124,7 +148,7 @@ const card = (
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {rows.map((row) => (
+                        {props.items.map((row , index) => (
                             <TableRow
                                 key={row.code}
                                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -133,14 +157,13 @@ const card = (
                                 }}
                             >
                                 <TableCell component="th" scope="row">
-                                    {row.code}
+                                    {index+1}
                                 </TableCell>
                                 <TableCell align="center">{row.name}</TableCell>
-                                <TableCell align="center">{row.desc}</TableCell>
-                                <TableCell align="center">{row.qnty}</TableCell>
-                                <TableCell align="center">{row.unit}</TableCell>
+                                <TableCell align="center">{row.discription}</TableCell>
+                                <TableCell align="center">{row.quantity}</TableCell>
+                                <TableCell align="center">{row.unitPrice}</TableCell>
                                 <TableCell align="center">{row.price}</TableCell>
-
                             </TableRow>
                         ))}
                     </TableBody>
@@ -148,18 +171,13 @@ const card = (
             </TableContainer>
 
             <Typography style={{ float: "right" }}>
-                <Button>Approve</Button>
-                <Button>Decline</Button>
+                <Button variant="contained" disabled ={props.status == "Pending" ? false : true} onClick={e=>{setApproval("Approved")}}>Approve</Button>
+                <Button variant="contained" disabled ={props.status == "Pending" ? false : true} onClick={e=>{setApproval("Declined")}}>Decline</Button>
             </Typography>
         </CardContent>
 
-    </React.Fragment>
-);
 
-export default function OutlinedCard() {
-    return (
-        <Box sx={{ minWidth: 275 }}>
-            <Card variant="outlined">{card}</Card>
+            </Card>
         </Box>
     );
 }

@@ -31,6 +31,7 @@ router.route('/readOder').get(async (req, res) => {
 router.route('/approve/:id').put(async (req, res) => {
     const id = req.params.id
     let ChooseSuppliers = '';
+    
 
     await Order.findByIdAndUpdate(id, req.body)
         .then((response) => {

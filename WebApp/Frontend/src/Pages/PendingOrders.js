@@ -1,12 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import "../Style/Button.css"
 import { Col, Row, Card, CardBody, CardTitle, Container, Button } from "reactstrap"
 import Card1 from "../MyComponents/Card/Card1";
 import ButtonToolBar from "../MyComponents/ButtonBar/ButtonToolBar";
+import axios from "axios";
+
 
 function PendingOrders() {
 
-    const array = [1, 2, 3, 4, 5]
+    const [orders , SetOrders] = useState([])
+
+    React.useEffect(() => {
+        axios.get('http://localhost:8020/order/readOder',).then((response) => {
+            SetOrders(response.data)
+        }).catch((err) => {
+            console.log(err)
+        })
+    }, [])
+
+
 
     return (
         <React.Fragment>
@@ -34,8 +46,16 @@ function PendingOrders() {
                 />
             </Row>
 
-            {array.map((e) => (
-                <Card1 />
+            {orders.map((e) => (
+                <Card1 
+                itemscount={e["items"].length}
+                duedate={e["DeliveryDate"]}
+                subdate={e["OrderDate"]}
+                desc={e["Description"]}
+                items={e["items"]}
+                status={e["AdminApproval"]}
+                id={e["_id"]}
+                />
             ))}
         </React.Fragment>
     )

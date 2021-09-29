@@ -23,7 +23,7 @@ import PendingOrders from '../../Pages/PendingOrders';
 import ButtonBar from '../ButtonBar/ButtonBar';
 
 import Test from '../../Pages/Test';
-import Test3 from '../../Pages/Test3';
+import Test3 from '../../Pages/Orders/GetOneOrder/OneOrder';
 
 
 
