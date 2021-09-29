@@ -6,6 +6,9 @@ import Side from "./MyComponents/sidebar/side"
 import NavBar  from './MyComponents/navbar/Navbar';
 import StaffSide from "./MyComponents/sidebar/staffside";
 import ManageOders from './Pages/staffNewordersPage';
+import SupplierOrder from "./Pages/SupplierOrder";
+
+
 
 function App() {
   return (
@@ -17,7 +20,8 @@ function App() {
       <Route path="/side" exact component={Side}/>
       <Route path="/staffside" exact component={StaffSide}/>
       <Route path="/manageOrder" exact component={ManageOders}/>
-      
+      <Route path="/supplier" exact component={SupplierOrder}/>
+
       </Router>
     </div>
   );

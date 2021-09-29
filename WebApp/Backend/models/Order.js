@@ -8,7 +8,7 @@ const orderSchema = new mongoose.Schema({
     },
     Description:{
         type: String,
-        required: true
+        required: false
     },
 
     DeliveryDate: {
@@ -46,6 +46,8 @@ const orderSchema = new mongoose.Schema({
         itemName: {type: mongoose.Schema.Types.ObjectId , required:false},
         quantity: {type: Number, required: false},
     }],
+
+
 
 })
 

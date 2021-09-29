@@ -3,9 +3,9 @@ const Supplier = require("../models/Supplier")
 
 router.route("/add").post((req,res)=>{
 
-    const Supplier = new Supplier(req.body);
+    const supplier = new Supplier(req.body);
 
-    Supplier.save().then((data)=>{
+    supplier.save().then((data)=>{
         res.json(data)
     }).catch((err)=>{
         console.log(err)

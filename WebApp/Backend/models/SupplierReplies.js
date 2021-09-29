@@ -9,11 +9,11 @@ const supplierReplySchema = new mongoose.Schema({
     },
     EstimateCost : {
         type: String,
-        required:true
+        required:false
     },
     Message:{
         type:String,
-        required:true
+        required:false
     },
     orders:{
         type:mongoose.Schema.Types.ObjectId,
