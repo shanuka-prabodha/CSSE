@@ -9,11 +9,13 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import ViewOrder from "../Supplier/ViewOrder";
-import Gateway from "../Payment/Gateway";
-import GetEstimate from "./GetEstimate";
+
 import {Row} from "reactstrap";
 import ButtonToolBar from "../../MyComponents/ButtonBar/ButtonToolBar";
 import {useHistory} from "react-router";
+import Gateway from "../Payment/Gateway";
+import GetEstimate from "../Admin/GetEstimate";
+import StaffButtonToolBar from "../../MyComponents/ButtonBar/StaffButtonToolBar";
 
 
 const _ = require('underscore-contrib');
@@ -39,7 +41,7 @@ const useStyles = makeStyles({
 
 
 
-export default function ReceivedOrders() {
+export default function StaffReceived() {
 
     const [orderList, setOrderList] = useState([]);
     const [itemList, setItemList] = useState([]);
@@ -108,16 +110,16 @@ export default function ReceivedOrders() {
 
             <Row style={{ paddingLeft: "2%", paddingBottom: "10px", fontSize: "30px", fontWeight: "bold" }}>Purchase Order Requested</Row>
             <Row style={{ paddingLeft: "2%" }}>
-                <ButtonToolBar
+                <StaffButtonToolBar
                     allClick={e => {
                         alert("All clicked")
                     }}
                     recevedClick={e => {
-                        history.push("/received")
+                        history.push("/st-received")
 
                     }}
                     purchaseclick={e => {
-                        history.push("/payed")
+                        history.push("/st-payed")
                     }}
                     deniedClick={e => {
                         alert("Denied clicked")
@@ -128,6 +130,9 @@ export default function ReceivedOrders() {
                     }}
                     pendingClick={e => {
                         alert("Pending clicked")
+                    }}
+                    messageClick={e => {
+                        history.push("/message")
                     }}
                 />
             </Row>
@@ -159,7 +164,7 @@ export default function ReceivedOrders() {
                             <StyledTableCell>View Order</StyledTableCell>
                             <StyledTableCell>Order state</StyledTableCell>
                             <StyledTableCell>payable Cost</StyledTableCell>
-                            {/*<StyledTableCell>Payment</StyledTableCell>*/}
+                            <StyledTableCell>Payment</StyledTableCell>
 
 
                         </TableRow>
@@ -211,13 +216,13 @@ export default function ReceivedOrders() {
                                     </TableCell>
 
 
-                                    {/*<TableCell>*/}
+                                    <TableCell>
 
-                                    {/*    <Gateway*/}
+                                        <Gateway
 
-                                    {/*    orderId={orderList._id}*/}
-                                    {/*    />*/}
-                                    {/*</TableCell>*/}
+                                            orderId={orderList._id}
+                                        />
+                                    </TableCell>
 
 
 

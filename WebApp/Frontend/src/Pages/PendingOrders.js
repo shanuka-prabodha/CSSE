@@ -30,10 +30,11 @@ function PendingOrders() {
                         alert("All clicked")
                     }}
                     recevedClick={e => {
-                        alert("Recevied clicked")
+                        history.push("/received")
+
                     }}
                     purchaseclick={e => {
-                        alert("Purchase clicked")
+                        history.push("/payed")
                     }}
                     deniedClick={e => {
                         alert("Denied clicked")
