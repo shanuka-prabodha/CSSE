@@ -8,8 +8,9 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import SupplieReplyForm from "./SupplieReplyForm";
-import ViewOrder from "./Supplier/ViewOrder";
+import ViewOrder from "../Supplier/ViewOrder";
+import Gateway from "../Payment/Gateway";
+
 
 const _ = require('underscore-contrib');
 const StyledTableCell = withStyles((theme) => ({
@@ -34,7 +35,7 @@ const useStyles = makeStyles({
 
 
 
-export default function SupplierOrder() {
+export default function ReceivedOrders() {
 
     const [orderList, setOrderList] = useState([]);
     const [itemList, setItemList] = useState([]);
@@ -52,9 +53,9 @@ export default function SupplierOrder() {
             // 61532085ebf085108c3b9e68
             //6153205febf085108c3b9e66
 
-            axios.get(`http://localhost:8020/reply/get-orders/${userId}`)
+            axios.get(`http://localhost:8020/order/readOder`)
                 .then((response) => {
-                    setOrderList(response.data.data);
+                    setOrderList(response.data);
                     // console.log(response.data)
 
                 })
@@ -95,12 +96,12 @@ export default function SupplierOrder() {
     //     // console.log(itemList)
     // }
 
-let count=0;
+    let count=0;
 
     return (
         <div className='container mt-lg-4' align="center">
 
-            SUPPLIER
+            Received Orders
             {/*<button onClick={printorder}>Click here</button>*/}
 
             {/*{*/}
@@ -116,53 +117,57 @@ let count=0;
                             <StyledTableCell>ID</StyledTableCell>
                             <StyledTableCell>Order Date</StyledTableCell>
                             <StyledTableCell>Due Date</StyledTableCell>
+                            <StyledTableCell>Priority</StyledTableCell>
                             <StyledTableCell>View Order</StyledTableCell>
-                            <StyledTableCell>Send Estimation</StyledTableCell>
                             <StyledTableCell>Order state</StyledTableCell>
+                            <StyledTableCell>Payment</StyledTableCell>
 
 
                         </TableRow>
                     </TableHead>
                     <TableBody>
                         {
-                            orderList.map(orderList => (
+                            orderList.filter((orderList)=>{
+
+                                if(orderList.State=='Received'){
+                                    return orderList
+                                }
+
+                            }).map(orderList => (
                                 <TableRow key={orderList}>
-                                    <TableCell>{orderList.ids}</TableCell>
+
                                     {/*<TableCell>Order {count=count+1}</TableCell>*/}
-                                    <TableCell>{orderList.oDate}</TableCell>
-                                    <TableCell>{orderList.dDate}</TableCell>
+                                    <TableCell>{orderList._id}</TableCell>
+                                    {/*<TableCell>ORDER  {index=index+1}</TableCell>*/}
+
+                                    <TableCell>{orderList.DeliveryDate}</TableCell>
+                                    <TableCell>{orderList.OrderDate}</TableCell>
+                                    <TableCell>{orderList.Priority}</TableCell>
 
                                     {/*<TableCell>{items.quantity}</TableCell>*/}
 
                                     <TableCell >
 
                                         <ViewOrder
-                                            orderid = {orderList.ids}
-                                            supplierid={userId}
+                                            orderid = {orderList._id}
+
 
                                         /></TableCell>
 
-                                    <TableCell >
 
-                                        <SupplieReplyForm
-                                            orderid = {orderList.ids}
-                                            supplierid={userId}
-
-                                    /></TableCell>
 
 
 
 
                                     <TableCell>
-                                    <div hidden={orderList.Assign=='false'}>
-                                        you were assigned You can Deliver Now
-                                    </div>
-
-                                        <div hidden={orderList.Assign=='true'}>
-                                            you were not assigned yet
-                                        </div>
-
+                                        {orderList.State}
                                     </TableCell>
+                                    <TableCell>
+                                        <Gateway/>
+                                    </TableCell>
+
+
+
                                 </TableRow>
                             ))
                         }

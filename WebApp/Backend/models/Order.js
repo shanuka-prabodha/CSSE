@@ -34,6 +34,11 @@ const orderSchema = new mongoose.Schema({
     Assign:{
         type:String,
         default:'false'
+    }
+    ,
+    State:{
+        type:String,
+        default:'Idle'
     },
     ChooseSuppliers: [{
         type:mongoose.Schema.Types.ObjectId,

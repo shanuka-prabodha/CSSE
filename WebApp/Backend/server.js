@@ -53,6 +53,10 @@ app.use('/item',Item)
 const Supplier = require('./routes/SupplierRoute')
 app.use('/supplier',Supplier)
 
+const Payment = require('./routes/PaymentRoute')
+app.use('/payment',Payment)
+
+
 
 
 app.listen(PORT,()=>{

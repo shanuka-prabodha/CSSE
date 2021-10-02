@@ -12,6 +12,7 @@ import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
 import { blue } from '@mui/material/colors';
 
+import { useHistory } from "react-router";
 
 /*
 product:"",
@@ -26,6 +27,17 @@ selectedfile:""*/
 const OderCard = ({post,setCurrentId})=>{
     
     const EventDispatch = useDispatch();
+    const history = useHistory();
+
+
+    const navigateRequsition=()=>{
+        history.push("/staffeOder",{
+            oderID :post._id
+        })
+    }
+
+ 
+
     return(
 
         <div style={{margin:'0 15%'}} >
@@ -44,7 +56,7 @@ const OderCard = ({post,setCurrentId})=>{
                             </TableRow>
                             <TableRow>
                                 <TableCell  style={{color:"white" , borderBottom:"none"}}>Description</TableCell>
-                                <TableCell style={{ padding: "0 15px" ,color:"white" , borderBottom:"none" }}>These goods are high priority for Site A</TableCell>
+                                <TableCell style={{ padding: "0 15px" ,color:"white" , borderBottom:"none" }}>{post.Description}</TableCell>
                             </TableRow>
                         </TableBody>
                     </Table>
@@ -52,9 +64,9 @@ const OderCard = ({post,setCurrentId})=>{
                 <div style={{ margin: "5px", paddingLeft: "100px", marginTop:'50px'}}>
                 <div>
                 <div style={{  color:"white" }}><label> Priority</label></div>
-                <div style={{  color:"white" }}><label> high</label></div>
+                <div style={{  color:"white" }}><label> {post.Priority}</label></div>
                </div>
-                    <div style={{ paddingTop: "15px" , color:"white" }}><label>Total Items  19</label></div>
+                    <div style={{ paddingTop: "15px" , color:"white" }}><label> Items :{post.items.length}</label></div>
                 </div>
 
                 <div style={{ marginLeft: "30%", marginTop: "40px" , color:"white" , paddingLeft:"px"}}>
@@ -66,7 +78,7 @@ const OderCard = ({post,setCurrentId})=>{
                 <div style={{marginTop:'10%'}}>
                
                 
-                    <Button style={{border:"1px solid blue" , marginLeft:"-15px" , padding:"5px",color:'blue' }}> Make Requistion</Button>
+                    <Button style={{border:"1px solid blue" , marginLeft:"-15px" , padding:"5px",color:'blue' }} onClick={()=>navigateRequsition()}> Make Requistion</Button>
                 
             
             </div>
