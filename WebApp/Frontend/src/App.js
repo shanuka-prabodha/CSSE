@@ -7,6 +7,7 @@ import NavBar  from './MyComponents/navbar/Navbar';
 import StaffSide from "./MyComponents/sidebar/staffside";
 import ManageOders from './Pages/staffNewordersPage';
 import SupplierOrder from "./Pages/SupplierOrder";
+import staffeOderManage from  "./Pages/staffOderManage";
 
 
 
@@ -21,6 +22,7 @@ function App() {
       <Route path="/staffside" exact component={StaffSide}/>
       <Route path="/manageOrder" exact component={ManageOders}/>
       <Route path="/supplier" exact component={SupplierOrder}/>
+      <Route path="/staffeOder" exact component={staffeOderManage}/>
 
       </Router>
     </div>

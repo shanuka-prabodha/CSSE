@@ -1,27 +1,36 @@
 const router = require("express").Router();
 const Order = require("../models/Order")
-const Reply = require("../models/SupplierReplies")
 
-router.route("/create").post((req, res) => {
+router.route("/create").post((req,res)=>{
 
     const order = new Order(req.body);
 
-    order.save().then((data) => {
-        res.json(data)
-    }).catch((err) => {
+    order.save().then((data)=>{
+        res.json(data.items)
+    }).catch((err)=>{
         console.log(err)
     })
 });
 
 
-router.route('/readOder').get(async (req, res) => {
+router.route('/readOder').get(async(req,res)=>{
     await Order.find()
-        .then((order) => {
-            res.json(order)
-        })
-        .catch(error => {
-            res.status(500).send(error.message);
-        })
+    .then((order)=>{
+        res.json(order)
+    })
+    .catch(error=>{
+        res.status(500).send(error.message);
+    })
+})
+
+router.route('/readOneOder/:id').get(async(req,res)=>{
+    await Order.find({_id: req.params.id})
+    .then((order)=>{
+        res.json(order)
+    })
+    .catch(error=>{
+        res.status(500).send(error.message);
+    })
 })
 
 
@@ -85,4 +94,32 @@ router.route('/find/:id').get(async (req, res) => {
 })
 
 
-module.exports = router;
+router.route('/staffupdate/:id').put(async(req,res) =>{
+    let oderID = req.params.id;
+    const{ReferenceNo,ChooseSuppliers} = req.body;
+
+    console.log(oderID);
+
+    const udpateOder = {
+        ReferenceNo,
+        ChooseSuppliers,
+        PassedState:'Passed',
+        AdminApproval:"Pending"
+
+
+    }
+
+    const update = await Order.findByIdAndUpdate(oderID,udpateOder)
+    .then(()=>{
+        res.status(200).send({status:'Oder updated'})
+    })
+    .catch((err)=>{
+        console.log(err);
+        res.status(500).send({status:"error with update "})
+    })
+
+})
+
+
+
+module.exports=router;

@@ -32,13 +32,13 @@ function NavBar(props) {
                         <Nav.Link href="/side" style={linkStyle} className="mx-3">Side</Nav.Link>
                         <Nav.Link href="/staffside" style={linkStyle} className="mx-3">StaffSide</Nav.Link>
                         <Nav.Link href="/manageOrder" style={linkStyle} className="mx-3">manageOder</Nav.Link>
-                        <Nav.Link href="/profile" style={linkStyle} className="mx-3">PROFILE</Nav.Link>
+                        <Nav.Link href="/staffeOder" style={linkStyle} className="mx-3">make Requsition</Nav.Link>
                         <Nav.Link href="/admin" style={linkStyle} className="mx-3">CONTACT</Nav.Link>
                         <Nav.Link href="/productManage" style={linkStyle} className="mx-3">Admin product manage</Nav.Link>
                         <Nav.Link href="/ShoppingAll" style={linkStyle} className="mx-3">All Shopping products</Nav.Link>
 
                         
-
+                        
                     </Nav>
                     
                 </Navbar.Collapse>
