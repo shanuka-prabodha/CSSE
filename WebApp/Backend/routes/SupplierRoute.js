@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const Supplier = require("../models/Supplier")
+const Reply = require("../models/SupplierReplies");
 
 router.route("/add").post((req,res)=>{
 
@@ -22,6 +23,23 @@ router.route('/readSupplier').get(async(req,res)=>{
     })
 })
 
+
+
+
+
+
+router.route('/find/:id').get(async (req, res) => {
+
+    console.log(req.params.id)
+    await Supplier.find({_id: req.params.id})
+        .then((reply) => {
+            res.json(reply)
+
+        })
+        .catch(error => {
+            res.status(500).send(error.message);
+        })
+})
 
 
 

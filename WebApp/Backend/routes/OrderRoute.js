@@ -41,6 +41,11 @@ router.route('/approve/:id').put(async (req, res) => {
     const id = req.params.id
     let ChooseSuppliers = '';
 
+
+    console.log(req.body.AdminApproval)
+
+
+
     await Order.findByIdAndUpdate(id, req.body)
         .then((response) => {
             // res.json(response.ChooseSuppliers)
@@ -52,18 +57,21 @@ router.route('/approve/:id').put(async (req, res) => {
 
 //supplier reply
 
-                const reply = new Reply({
-                    "suppliers": ChooseSuppliers,
-                    "orders": id,
-                    "Message": 'empty'
+                if(req.body.AdminApproval=='Approve'){
 
-                });
+                    const reply = new Reply({
+                        "suppliers": ChooseSuppliers,
+                        "orders": id,
+                        "Message": 'empty'
 
-                reply.save().then((data) => {
-                    console.log("Order Received")
-                }).catch((err) => {
-                    console.log(err)
-                })
+                    });
+
+                    reply.save().then((data) => {
+                        console.log("Order Received")
+                    }).catch((err) => {
+                        console.log(err)
+                    })
+                }
 
 
             })
@@ -74,6 +82,7 @@ router.route('/approve/:id').put(async (req, res) => {
             res.status(500).send({error: error.message})
         })
 })
+
 
 
 router.route('/find/:id').get(async (req, res) => {
@@ -122,4 +131,23 @@ router.route('/staffupdate/:id').put(async(req,res) =>{
 
 
 
-module.exports=router;
+
+router.route('/assign/:id').put(async (req, res) => {
+    const id = req.params.id
+
+    console.log(id)
+
+    await Order.findByIdAndUpdate(id, req.body)
+        .then((response) => {
+            // res.json(response.ChooseSuppliers)
+
+            })
+
+            res.json("Order sent")
+        .catch((error) => {
+            res.status(500).send({error: error.message})
+        })
+})
+
+
+module.exports = router;

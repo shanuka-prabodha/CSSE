@@ -29,7 +29,7 @@ function NavBar(props) {
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="mx-auto">
                         <Nav.Link href="/" style={linkStyle} className="mx-3">HOME</Nav.Link>
-                        <Nav.Link href="/side" style={linkStyle} className="mx-3">Side</Nav.Link>
+                        <Nav.Link href="/approval" style={linkStyle} className="mx-3">Approved</Nav.Link>
                         <Nav.Link href="/staffside" style={linkStyle} className="mx-3">StaffSide</Nav.Link>
                         <Nav.Link href="/manageOrder" style={linkStyle} className="mx-3">manageOder</Nav.Link>
                         <Nav.Link href="/staffeOder" style={linkStyle} className="mx-3">make Requsition</Nav.Link>

@@ -19,12 +19,11 @@ import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 
 import ManageOders from '../../Pages/staffNewordersPage'
-
+import PendingOrders from '../../Pages/PendingOrders';
 import ButtonBar from '../ButtonBar/ButtonBar';
 
 import Test from '../../Pages/Test';
-import Test2 from '../../Pages/Test2';
-import Test3 from '../../Pages/Test3';
+import Test3 from '../../Pages/Orders/GetOneOrder/OneOrder';
 
 
 
@@ -154,7 +153,7 @@ export default function MiniDrawer() {
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
-            {mytab==0?<ManageOders/>:mytab==1?<Test3/>:<Test2/>}
+            {mytab==0?<ManageOders/>:mytab==1?<Test3/>:<PendingOrders/>}
                 
 
       </Box>
