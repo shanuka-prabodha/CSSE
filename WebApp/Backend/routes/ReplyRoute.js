@@ -26,7 +26,12 @@ router.route('/get-orders/:id').get(async (req, res) => {
             // console.log(data)
             data.map((data) => {
                 // console.log(data.orders._id)
-                order.push({ids: data.orders._id, oDate: data.orders.OrderDate, dDate: data.orders.DeliveryDate, Assign:data.orders.Assign})
+                order.push({
+                    ids: data.orders._id,
+                    oDate: data.orders.OrderDate,
+                    dDate: data.orders.DeliveryDate,
+                    Assign: data.orders.Assign
+                })
 
             })
 

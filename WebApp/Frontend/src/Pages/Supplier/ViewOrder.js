@@ -84,7 +84,7 @@ function Alert(props) {
 }
 
 
-export default function SupplieReplyForm(props) {
+export default function ViewOrder(props) {
     const [open, setOpen] = React.useState(false);
     const [helperText, setHelperText] = React.useState('');
     const [openSnack, setOpenSnack] = React.useState(false);
@@ -136,31 +136,31 @@ export default function SupplieReplyForm(props) {
     function onSubmit(e) {
 
         e.preventDefault()
+        setOpen(false);
 
-
-        const OrderObject = {
-            orderId: props.orderid,
-            supplierId: props.supplierid,
-            message: message,
-            EstimateCost: cost
-        }
-
-        alert("clicked")
-        axios.post(`http://localhost:8020/reply/order`, OrderObject)
-            .then((res) => {
-                // console.log(res.data)
-                // setItemList(res.data)
-                setOpen(false);
-
-            })
-            .catch(error => {
-                alert(error)
-            })
+        // const OrderObject = {
+        //     orderId: props.orderid,
+        //     supplierId: props.supplierid,
+        //     message: message,
+        //     EstimateCost: cost
+        // }
+        //
+        // alert("clicked")
+        // axios.post(`http://localhost:8020/reply/order`, OrderObject)
+        //     .then((res) => {
+        //         // console.log(res.data)
+        //         // setItemList(res.data)
+        //
+        //
+        //     })
+        //     .catch(error => {
+        //         alert(error)
+        //     })
 
 
     }
 
-let count=0;
+    let count = 0;
     return (
 
         <div style={{zIndex: "-99"}}>
@@ -172,7 +172,7 @@ let count=0;
             </Snackbar>
 
             <Button variant="outlined" color="secondary" onClick={handleClickOpen}>
-                Send Estimation
+                View Order
             </Button>
             <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
                 <DialogTitle id="customized-dialog-title" onClose={handleClose}>
@@ -184,7 +184,7 @@ let count=0;
                     <DialogContent dividers>
 
 
-                        <div style={{width: "550px", height: "500px"}}>
+                        <div style={{width: "550px", height: "250px"}}>
 
 
                             <TableContainer component={Paper}>
@@ -206,7 +206,7 @@ let count=0;
                                             itemList.map(itemList => (
                                                 <TableRow key={itemList.itemName}>
                                                     {/*<TableCell>{itemList.itemName}</TableCell>*/}
-                                                    <TableCell>{count=count+1}</TableCell>
+                                                    <TableCell>{count = count + 1}</TableCell>
                                                     <TableCell>{itemList.name}</TableCell>
                                                     {/*<TableCell>{itemList.unitPrice}</TableCell>*/}
                                                     <TableCell>{itemList.quantity}</TableCell>
@@ -222,32 +222,32 @@ let count=0;
                             </TableContainer>
 
 
-                            <div>
-                                <textarea
-                                    style={{width:"550px", height:"250px"}}
-                                    type='text'
-                                    color="secondary"
-                                    label="Write your Estimation "
-                                    placeholder="Write your Estimation Budget Here............"
-                                    onChange={(event) => {
-                                        setHelperText(' ');
-                                        setMessage(event.target.value)
-                                    }}
-                                    fullWidth/>
-                            </div>
+                            {/*<div>*/}
+                            {/*    <textarea*/}
+                            {/*        style={{width: "550px", height: "250px"}}*/}
+                            {/*        type='text'*/}
+                            {/*        color="secondary"*/}
+                            {/*        label="Write your Estimation "*/}
+                            {/*        placeholder="Write your Estimation Budget Here............"*/}
+                            {/*        onChange={(event) => {*/}
+                            {/*            setHelperText(' ');*/}
+                            {/*            setMessage(event.target.value)*/}
+                            {/*        }}*/}
+                            {/*        fullWidth/>*/}
+                            {/*</div>*/}
 
-                            <div>
-                                <TextField
-                                    type='number'
-                                    color="secondary"
-                                    label="Enter your Total Budget"
-                                    placeholder="Rs. 25000/="
-                                    onChange={(event) => {
-                                        setHelperText(' ');
-                                        setCost(event.target.value)
-                                    }}
-                                    fullWidth/>
-                            </div>
+                            {/*<div>*/}
+                            {/*    <TextField*/}
+                            {/*        type='number'*/}
+                            {/*        color="secondary"*/}
+                            {/*        label="Enter your Total Budget"*/}
+                            {/*        placeholder="Rs. 25000/="*/}
+                            {/*        onChange={(event) => {*/}
+                            {/*            setHelperText(' ');*/}
+                            {/*            setCost(event.target.value)*/}
+                            {/*        }}*/}
+                            {/*        fullWidth/>*/}
+                            {/*</div>*/}
 
 
                             {/*<div>*/}
@@ -270,7 +270,7 @@ let count=0;
                     </DialogContent>
                     <DialogActions>
                         <Button type="submit" color="primary">
-                            Send
+                            Ok
                         </Button>
                     </DialogActions>
 
