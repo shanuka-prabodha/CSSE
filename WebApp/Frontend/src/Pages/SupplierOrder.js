@@ -9,19 +9,31 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import SupplieReplyForm from "./SupplieReplyForm";
+import ViewOrder from "./Supplier/ViewOrder";
 
 const _ = require('underscore-contrib');
 const StyledTableCell = withStyles((theme) => ({
     head: {
-        backgroundColor: '#5E4FA2',
+        backgroundColor: '#FA334E',
         color: theme.palette.common.white,
     },
     body: {
         fontSize: 14,
         color: theme.palette.common.white,
-
     },
 }))(TableCell);
+
+
+const useStyles = makeStyles({
+    table: {
+        minWidth: 650,
+        backgroundColor: 'darkgray',
+        color: '#ffffff',
+    },
+});
+
+
+
 export default function SupplierOrder() {
 
     const [orderList, setOrderList] = useState([]);
@@ -86,7 +98,7 @@ export default function SupplierOrder() {
 let count=0;
 
     return (
-        <div>
+        <div className='container mt-lg-4' align="center">
 
             SUPPLIER
             {/*<button onClick={printorder}>Click here</button>*/}
@@ -98,13 +110,14 @@ let count=0;
             <TableContainer component={Paper}>
 
 
-                <Table aria-label="simple table">
+                <Table style={{backgroundColor: "#FFFFFF7C", color: "white"}}>
                     <TableHead>
                         <TableRow>
                             <StyledTableCell>ID</StyledTableCell>
                             <StyledTableCell>Order Date</StyledTableCell>
                             <StyledTableCell>Due Date</StyledTableCell>
-                            <StyledTableCell>Action</StyledTableCell>
+                            <StyledTableCell>View Order</StyledTableCell>
+                            <StyledTableCell>Send Estimation</StyledTableCell>
                             <StyledTableCell>Order state</StyledTableCell>
 
 
@@ -120,13 +133,25 @@ let count=0;
                                     <TableCell>{orderList.dDate}</TableCell>
 
                                     {/*<TableCell>{items.quantity}</TableCell>*/}
-                                    <TableCell>
+
+                                    <TableCell >
+
+                                        <ViewOrder
+                                            orderid = {orderList.ids}
+                                            supplierid={userId}
+
+                                        /></TableCell>
+
+                                    <TableCell >
 
                                         <SupplieReplyForm
                                             orderid = {orderList.ids}
                                             supplierid={userId}
 
                                     /></TableCell>
+
+
+
 
                                     <TableCell>
                                     <div hidden={orderList.Assign=='false'}>
