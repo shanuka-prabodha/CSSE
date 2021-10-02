@@ -89,8 +89,8 @@ export default function SupplierMessages() {
                         {
                             orderList.map(orderList => (
                                 <TableRow>
-                                    {/*<TableCell>{orderList._id}</TableCell>*/}
-                                    <TableCell>ORDER  {index=index+1}</TableCell>
+                                    <TableCell>{orderList._id}</TableCell>
+                                    {/*<TableCell>ORDER  {index=index+1}</TableCell>*/}
 
                                     <TableCell>{orderList.DeliveryDate}</TableCell>
                                     <TableCell>{orderList.OrderDate}</TableCell>
