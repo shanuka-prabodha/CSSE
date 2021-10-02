@@ -34,3 +34,13 @@ export const updateStaffOrder =(id,post) => async(dispatch)=>{
     }
 }
 
+export const getApprovel = (id)=>async(dispatch)=>{
+
+    try{
+        const{data} = await api.fetachApprovel(id);
+        dispatch({type:'FETCH_APPROVEL',payload:data})
+        console.log(id)
+    }catch(error){
+        console.log(error)
+    }
+}

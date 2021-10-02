@@ -170,7 +170,18 @@ router.route('/state/:id').put(async (req, res) => {
 })
 
 
+router.route('/readApprovelOder').get(async(req,res)=>{
 
+   let apporvel = req.query.id;
+   console.log(apporvel)
+    await Order.find({ AdminApproval : 'Decline'})
+    .then((order)=>{
+        res.json(order)
+    })
+    .catch(error=>{
+        res.status(500).send(error.message);
+    })
+})
 
 
 

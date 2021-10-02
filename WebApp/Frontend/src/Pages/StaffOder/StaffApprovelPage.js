@@ -1,19 +1,20 @@
 import React,{useState,useEffect} from 'react';
 import {Container,AppBar,Typography,Grow,Grid,TextField, Button} from '@material-ui/core';
 import axios from 'axios';
-import EventPosts from '../MyComponents/ordercrads/staffCards';
-
+import EventPosts from '../../MyComponents/ordercrads/oderApprovedCards'
 import Styles from './styles';
 import {useDispatch} from 'react-redux';
-import {getOrder,getApprovel} from '../action/orderAction'
+import {getOrder,getApprovel} from '../../action/orderAction'
 import { Col, Row, CardBody, CardTitle } from "reactstrap"
 import CardContent from "@mui/material/CardContent";
-import ButtonToolBar from "../MyComponents/ButtonBar/ButtonToolBar";
+import ButtonToolBar from "../../MyComponents/ButtonBar/ButtonToolBar";
 import { useHistory } from "react-router";
-
+import { useLocation } from "react-router-dom";
 const ManageOders =() =>{
 
     const history = useHistory();
+    const location = useLocation();
+    const approve = location.state.approvel
         const [currentId,setCurrentId] = useState(null);
         
 
@@ -21,11 +22,13 @@ const ManageOders =() =>{
         const dispatch =useDispatch();
         useEffect(()=>{
 
-            dispatch(getOrder());             
+   
+            dispatch(getApprovel(approve));             
 
         },[currentId,dispatch]);
 
        
+      
 
     return (
 
@@ -36,7 +39,7 @@ const ManageOders =() =>{
             <Row style={{ paddingLeft: "2%" }}>
                 <ButtonToolBar
                     allClick={e => {
-                        alert("All clicked")
+                       
                     }}
                     recevedClick={e => {
                         alert("Recevied clicked")
@@ -45,10 +48,11 @@ const ManageOders =() =>{
                         alert("Purchase clicked")
                     }}
                     deniedClick={e => {
-                        history.push("/staffApproved",{approvel :'Decline'})
+                       
                     }}
                     approveClick={e => {
-                        history.push("/staffApproved",{approvel :'Approve'})
+                        alert("Approve clicked")
+                        history.push("/supplier")
                     }}
                     pendingClick={e => {
                         alert("Pending clicked")
@@ -67,7 +71,7 @@ const ManageOders =() =>{
                             <Grid item xs ={12} sm ={7}>
                                 
 
-                                <EventPosts setCurrentId ={setCurrentId}   />     
+                                <EventPosts approve ={approve}   />     
                             </Grid >
 
                         </Grid>
