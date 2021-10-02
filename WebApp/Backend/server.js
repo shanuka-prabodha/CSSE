@@ -5,6 +5,7 @@ const cors=require("cors");
 const path = require('path');
 const dotenv=require("dotenv");
 
+
 const app = express();
 dotenv.config();
 app.use(cors());
@@ -12,6 +13,7 @@ app.use(cors());
 app.use(bodyParser.json());
 const PORT=process.env.PORT ||8020
 const URL = process.env.MONGODB_URL;
+
 
 
 
@@ -35,7 +37,8 @@ app.route('/').get((req,res)=>{
     res.send('SLIIT CSSE');
 })
 
-
+const userRouter = require("./routes/User");
+app.use('/user',userRouter)
 
 const Order = require('./routes/OrderRoute')
 app.use('/order',Order)
