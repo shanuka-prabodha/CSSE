@@ -264,7 +264,9 @@ isMulti
                 <Button>Submit for Approve</Button>
                
             </Typography>
-
+            { eventposts.map((post,index)=>{ 
+                    return(
+                        <div>
             <TableContainer component={Paper}>
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
                     <TableHead>
@@ -278,28 +280,34 @@ isMulti
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {rows.map((row) => (
+                
+                                { post.items.map((item,ind)=>(
                             <TableRow
-                                key={row.code}
+                                key={ind}
                                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                 onClick={e => {
-                                    alert(row.name)
+                                    alert(item.name)
                                 }}
                             >
                                 <TableCell component="th" scope="row">
-                                    {row.code}
+                                    {item.itemName}
                                 </TableCell>
-                                <TableCell align="center">{row.name}</TableCell>
-                                <TableCell align="center">{row.desc}</TableCell>
-                                <TableCell align="center">{row.qnty}</TableCell>
-                                <TableCell align="center">{row.unit}</TableCell>
-                                <TableCell align="center">{row.price}</TableCell>
+                                <TableCell align="center">{item.name}</TableCell>
+                                <TableCell align="center">{item.discription}</TableCell>
+                                <TableCell align="center">{item.quantity}</TableCell>
+                                <TableCell align="center">{item.unitPrice}</TableCell>
+                                
 
                             </TableRow>
-                        ))}
+                        
+                    ))}
+                            
+                   
                     </TableBody>
                 </Table>
             </TableContainer>
+            </div>
+            )})}
 
             <Typography style={{ float: "right" }}>
                 <Button>Approve</Button>
