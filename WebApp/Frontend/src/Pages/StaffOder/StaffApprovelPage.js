@@ -7,7 +7,7 @@ import {useDispatch} from 'react-redux';
 import {getOrder,getApprovel} from '../../action/orderAction'
 import { Col, Row, CardBody, CardTitle } from "reactstrap"
 import CardContent from "@mui/material/CardContent";
-import ButtonToolBar from "../../MyComponents/ButtonBar/ButtonToolBar";
+import ButtonToolBar from "../../MyComponents/ButtonBar/StaffButtonToolBar";
 import { useHistory } from "react-router";
 import { useLocation } from "react-router-dom";
 const ManageOders =() =>{
@@ -25,7 +25,7 @@ const ManageOders =() =>{
    
             dispatch(getApprovel(approve));             
 
-        },[currentId,dispatch]);
+        },[currentId,dispatch,approve]);
 
        
       
@@ -37,10 +37,16 @@ const ManageOders =() =>{
 <CardContent>
             <Row style={{ paddingLeft: "2%", paddingBottom: "10px", fontSize: "30px", fontWeight: "bold" }}>Purchase Order Requested</Row>
             <Row style={{ paddingLeft: "2%" }}>
-                <ButtonToolBar
+            <ButtonToolBar
                     allClick={e => {
-                       
+                        history.push("/manageOrder")
                     }}
+
+                    newClick={e => {
+                        history.push("/staffApproved",{approvel :'New'})
+                    }}
+
+                    
                     recevedClick={e => {
                         alert("Recevied clicked")
                     }}
@@ -48,14 +54,27 @@ const ManageOders =() =>{
                         alert("Purchase clicked")
                     }}
                     deniedClick={e => {
-                       
+                        history.push("/staffApproved",{approvel :'Decline'})
                     }}
                     approveClick={e => {
-                        alert("Approve clicked")
-                        history.push("/supplier")
+
+                        history.push("/staffApproved",{approvel :'Approve'})
+
                     }}
                     pendingClick={e => {
-                        alert("Pending clicked")
+                        history.push("/staffApproved",{approvel :'Pending'})
+                    }}
+
+                    messageClick={e => {
+                        history.push("/message")
+                    }}
+
+                    recevedClick={e => {
+                        history.push("/st-received")
+
+                    }}
+                    purchaseclick={e => {
+                        history.push("/st-payed")
                     }}
                 />
             </Row>

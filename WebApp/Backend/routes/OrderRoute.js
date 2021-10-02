@@ -174,7 +174,7 @@ router.route('/readApprovelOder').get(async(req,res)=>{
 
    let apporvel = req.query.id;
    console.log(apporvel)
-    await Order.find({ AdminApproval : 'Decline'})
+    await Order.find({ AdminApproval :apporvel})
     .then((order)=>{
         res.json(order)
     })

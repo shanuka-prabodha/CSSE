@@ -13,7 +13,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import ButtonToolBar from "../MyComponents/ButtonBar/ButtonToolBar";
+import ButtonToolBar from "../MyComponents/ButtonBar/StaffButtonToolBar";
 
 import React,{useState,useEffect} from 'react';
 import{useSelector,useDispatch} from 'react-redux'
@@ -25,7 +25,7 @@ import { useLocation } from "react-router-dom";
 
 import SupplierCard from '../MyComponents/supplierCard/supplierCard'
 import {Grid} from '@material-ui/core'
-
+import { useHistory } from "react-router";
 
 function createData(code, name, desc, qnty, unit, price) {
     return { code, name, desc, qnty, unit, price };
@@ -56,6 +56,8 @@ const bull = (
 
 
 export default function OutlinedCard() {
+
+    const history = useHistory();
 
     const [currentId,setCurrentId] = useState(null);
     const [SelectedSupliers,setSelectedSupliers] = useState([])
@@ -164,10 +166,16 @@ const eventposts = useSelector((state)=>state.orderReducer)
         <CardContent>
             <Row style={{ paddingLeft: "2%", paddingBottom: "10px", fontSize: "30px", fontWeight: "bold" }}>Purchase order for requistion</Row>
             <Row style={{ paddingLeft: "2%" }}>
-                <ButtonToolBar
+            <ButtonToolBar
                     allClick={e => {
                         alert("All clicked")
                     }}
+
+                    newClick={e => {
+                        history.push("/manageOrder")
+                    }}
+
+                    
                     recevedClick={e => {
                         alert("Recevied clicked")
                     }}
@@ -175,13 +183,27 @@ const eventposts = useSelector((state)=>state.orderReducer)
                         alert("Purchase clicked")
                     }}
                     deniedClick={e => {
-                        alert("Denied clicked")
+                        history.push("/staffApproved",{approvel :'Decline'})
                     }}
                     approveClick={e => {
-                        alert("Approve clicked")
+
+                        history.push("/staffApproved",{approvel :'Approve'})
+
                     }}
                     pendingClick={e => {
-                        alert("Pending clicked")
+                        history.push("/staffApproved",{approvel :'Pending'})
+                    }}
+
+                    messageClick={e => {
+                        history.push("/message")
+                    }}
+
+                    recevedClick={e => {
+                        history.push("/st-received")
+
+                    }}
+                    purchaseclick={e => {
+                        history.push("/st-payed")
                     }}
                 />
             </Row>
