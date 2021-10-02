@@ -125,8 +125,8 @@ let index=0;
                                     <TableRow>
 
 
-                                        {/*<TableCell>{replyList.orders}</TableCell>*/}
-                                        <TableCell>{index=index+1}</TableCell>
+                                        <TableCell>{replyList.orders}</TableCell>
+                                        {/*<TableCell>{index=index+1}</TableCell>*/}
 
                                         {/*<TableCell>{replyList.suppliers}</TableCell>*/}
 

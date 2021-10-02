@@ -114,8 +114,8 @@ let count=0;
                         {
                             orderList.map(orderList => (
                                 <TableRow key={orderList}>
-                                    {/*<TableCell>{orderList.ids}</TableCell>*/}
-                                    <TableCell>Order {count=count+1}</TableCell>
+                                    <TableCell>{orderList.ids}</TableCell>
+                                    {/*<TableCell>Order {count=count+1}</TableCell>*/}
                                     <TableCell>{orderList.oDate}</TableCell>
                                     <TableCell>{orderList.dDate}</TableCell>
 

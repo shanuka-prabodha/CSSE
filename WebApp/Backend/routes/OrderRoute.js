@@ -31,7 +31,11 @@ router.route('/readOder').get(async (req, res) => {
 router.route('/approve/:id').put(async (req, res) => {
     const id = req.params.id
     let ChooseSuppliers = '';
-    
+
+
+    console.log(req.body.AdminApproval)
+
+
 
     await Order.findByIdAndUpdate(id, req.body)
         .then((response) => {
@@ -44,18 +48,21 @@ router.route('/approve/:id').put(async (req, res) => {
 
 //supplier reply
 
-                const reply = new Reply({
-                    "suppliers": ChooseSuppliers,
-                    "orders": id,
-                    "Message": 'empty'
+                if(req.body.AdminApproval=='Approve'){
 
-                });
+                    const reply = new Reply({
+                        "suppliers": ChooseSuppliers,
+                        "orders": id,
+                        "Message": 'empty'
 
-                reply.save().then((data) => {
-                    console.log("Order Received")
-                }).catch((err) => {
-                    console.log(err)
-                })
+                    });
+
+                    reply.save().then((data) => {
+                        console.log("Order Received")
+                    }).catch((err) => {
+                        console.log(err)
+                    })
+                }
 
 
             })
