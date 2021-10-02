@@ -24,7 +24,12 @@ import Gateway from "./Pages/Payment/Gateway";
 import ReceivedOrders from "./Pages/Admin/ReceivedOrders";
 import PayedOrders from "./Pages/Admin/PayedOrders";
 
+
 import StaffeApprovedOders from "./Pages/StaffOder/StaffApprovelPage";
+
+//staff components
+import StaffReceived from "./Pages/Staff/StaffReceived";
+import StaffPayed from "./Pages/Staff/StaffPayed";
 
 
 function App() {
@@ -57,6 +62,10 @@ function App() {
         <Route path="/payed" exact component={PayedOrders} />
 
         <Route path="/staffApproved" exact component={StaffeApprovedOders} />
+
+
+        <Route path="/st-received" exact component={StaffReceived} />
+        <Route path="/st-payed" exact component={StaffPayed} />
 
 
 

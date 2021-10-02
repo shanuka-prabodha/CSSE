@@ -48,7 +48,9 @@ const ManageOders =() =>{
                         history.push("/staffApproved",{approvel :'Decline'})
                     }}
                     approveClick={e => {
+
                         history.push("/staffApproved",{approvel :'Approve'})
+
                     }}
                     pendingClick={e => {
                         alert("Pending clicked")

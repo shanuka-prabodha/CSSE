@@ -171,7 +171,7 @@ let count=0;
                 </Alert>
             </Snackbar>
 
-            <Button variant="outlined" color="secondary" onClick={handleClickOpen}>
+            <Button disabled={props.assign=='true'} variant="outlined" color="secondary" onClick={handleClickOpen}>
                 Send Estimation
             </Button>
             <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>

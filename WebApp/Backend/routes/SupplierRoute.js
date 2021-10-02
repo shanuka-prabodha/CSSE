@@ -54,6 +54,8 @@ app.get('/find/:id',async (req, res) => {
 
 
 
+
+
 app.post("/register", (req,res) =>{
     const email = req.body.email
     const name = req.body.company

@@ -10,6 +10,10 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import ViewOrder from "../Supplier/ViewOrder";
 import Gateway from "../Payment/Gateway";
+import GetEstimate from "./GetEstimate";
+import {Row} from "reactstrap";
+import ButtonToolBar from "../../MyComponents/ButtonBar/ButtonToolBar";
+import {useHistory} from "react-router";
 
 
 const _ = require('underscore-contrib');
@@ -34,7 +38,6 @@ const useStyles = makeStyles({
 });
 
 
-
 export default function PayedOrders() {
 
     const [orderList, setOrderList] = useState([]);
@@ -42,12 +45,11 @@ export default function PayedOrders() {
     let [itemList2, setItemList2] = useState({});
 
     let items = []
-    const userId= "61531ff1ebf085108c3b9e61";
+    const userId = "61531ff1ebf085108c3b9e61";
 
     useEffect(() => {
 
         function getOrderList() {
-
 
 
             // 61532085ebf085108c3b9e68
@@ -96,10 +98,42 @@ export default function PayedOrders() {
     //     // console.log(itemList)
     // }
 
-    let count=0;
-
+    let count = 0;
+    const history = useHistory();
     return (
         <div className='container mt-lg-4' align="center">
+
+            <Row style={{ paddingLeft: "2%", paddingBottom: "10px", fontSize: "30px", fontWeight: "bold" }}>Purchase Order Requested</Row>
+            <Row style={{ paddingLeft: "2%" }}>
+                <ButtonToolBar
+                    allClick={e => {
+                        alert("All clicked")
+                    }}
+                    recevedClick={e => {
+                        history.push("/received")
+
+                    }}
+                    purchaseclick={e => {
+                        history.push("/payed")
+                    }}
+                    deniedClick={e => {
+                        alert("Denied clicked")
+                    }}
+                    approveClick={e => {
+                        alert("Approve clicked")
+                        history.push("/supplier")
+                    }}
+                    pendingClick={e => {
+                        alert("Pending clicked")
+                    }}
+                />
+            </Row>
+
+
+
+
+
+
 
             Received Orders
             {/*<button onClick={printorder}>Click here</button>*/}
@@ -120,16 +154,17 @@ export default function PayedOrders() {
                             <StyledTableCell>Priority</StyledTableCell>
                             <StyledTableCell>View Order</StyledTableCell>
                             <StyledTableCell>Order state</StyledTableCell>
-                            <StyledTableCell>Payment</StyledTableCell>
+                            <StyledTableCell>Payed Amount</StyledTableCell>
+                            {/*<StyledTableCell>Payment</StyledTableCell>*/}
 
 
                         </TableRow>
                     </TableHead>
                     <TableBody>
                         {
-                            orderList.filter((orderList)=>{
+                            orderList.filter((orderList) => {
 
-                                if(orderList.State=='Payed'){
+                                if (orderList.State == 'Payed') {
                                     return orderList
                                 }
 
@@ -146,29 +181,32 @@ export default function PayedOrders() {
 
                                     {/*<TableCell>{items.quantity}</TableCell>*/}
 
-                                    <TableCell >
+                                    <TableCell>
 
                                         <ViewOrder
-                                            orderid = {orderList._id}
+                                            orderid={orderList._id}
 
 
                                         /></TableCell>
 
 
-
-
-
-
                                     <TableCell>
                                         {orderList.State}
                                     </TableCell>
+                                    {/*<TableCell>*/}
+                                    {/*    <Gateway*/}
+
+                                    {/*        orderId={orderList._id}*/}
+                                    {/*    />*/}
+                                    {/*</TableCell>*/}
+
                                     <TableCell>
-                                        <Gateway
+
+                                        <GetEstimate
 
                                             orderId={orderList._id}
                                         />
                                     </TableCell>
-
 
 
                                 </TableRow>
