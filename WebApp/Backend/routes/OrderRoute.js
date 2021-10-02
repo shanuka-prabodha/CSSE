@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const Order = require("../models/Order")
+const Reply = require("../models/SupplierReplies")
 
 router.route("/create").post((req,res)=>{
 
@@ -148,6 +149,31 @@ router.route('/assign/:id').put(async (req, res) => {
             res.status(500).send({error: error.message})
         })
 })
+
+
+
+router.route('/state/:id').put(async (req, res) => {
+    const id = req.params.id
+
+    console.log(id)
+
+    await Order.findByIdAndUpdate(id, req.body)
+        .then((response) => {
+            // res.json(response.ChooseSuppliers)
+
+        })
+
+    res.json("Order sent")
+        .catch((error) => {
+            res.status(500).send({error: error.message})
+        })
+})
+
+
+
+
+
+
 
 
 module.exports = router;

@@ -4,10 +4,11 @@ import { Col, Row, Card, CardBody, CardTitle, Container, Button } from "reactstr
 import Card1 from "../MyComponents/Card/Card1";
 import ButtonToolBar from "../MyComponents/ButtonBar/ButtonToolBar";
 import axios from "axios";
+import {useHistory} from "react-router";
 
 
 function PendingOrders() {
-
+    const history = useHistory();
     const [orders , SetOrders] = useState([])
 
     React.useEffect(() => {
@@ -39,6 +40,7 @@ function PendingOrders() {
                     }}
                     approveClick={e => {
                         alert("Approve clicked")
+                        history.push("/supplier")
                     }}
                     pendingClick={e => {
                         alert("Pending clicked")

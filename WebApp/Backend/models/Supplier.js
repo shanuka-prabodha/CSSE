@@ -2,28 +2,32 @@ const mongoose = require('mongoose')
 
 const supplierSchema = new mongoose.Schema({
 
-    Name : {
+    Name: {
         type: String,
-        required:true
+        required: false
     },
-    Location : {
+    Location: {
         type: String,
-        required:true
+        required: false
     },
-    Type:{
-        type:String,
-        required:true
+    Type: {
+        type: String,
+        required: false
     },
-    Email:{
-        type:String,
-        required:true
+    Email: {
+        type: String,
+        required: true
     },
-    Phone:{
-        type:String,
-        required:true
+    Password: {
+        type: String,
+        required: true
+    },
+    Phone: {
+        type: String,
+        required: false
     }
 
 })
 
-const SupplierModel = mongoose.model('suppliers' , supplierSchema);
-module.exports=SupplierModel;
+const SupplierModel = mongoose.model('suppliers', supplierSchema);
+module.exports = SupplierModel;

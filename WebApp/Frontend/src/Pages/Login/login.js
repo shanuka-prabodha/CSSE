@@ -28,7 +28,7 @@ export default function Login() {
            // toast.error("Password is empty", { position: toast.POSITION.TOP_CENTER, autoClose: 3000 })
            alert("Pasword empty")
         } else {
-            axios.post("http://localhost:8020/user/login", oldUser).then((response) => {
+            axios.post("http://localhost:8020/supplier/login", oldUser).then((response) => {
                 if (response.data.message) {
                     //toast.error(response.data.message, { position: toast.POSITION.TOP_CENTER, autoClose: 3000 })
                     alert(response.data.message)

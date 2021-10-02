@@ -33,26 +33,50 @@ const useStyles = makeStyles({
 });
 
 
-
 export default function SupplierOrder() {
+
+    const [userType, setUserType] = useState('');
+    const [id, setId] = useState([]);
+
 
     const [orderList, setOrderList] = useState([]);
     const [itemList, setItemList] = useState([]);
     let [itemList2, setItemList2] = useState({});
 
     let items = []
-    const userId= "61531ff1ebf085108c3b9e61";
+    const userId = "61531ff1ebf085108c3b9e61";
 
     useEffect(() => {
 
-        function getOrderList() {
+        const getusertype = async () => {
+            const access_token = localStorage.getItem('token')
+            let config = {
+                headers: {
+                    'Authorization': 'Bearer ' + access_token
+                }
+            }
+            axios.get('http://localhost:8020/supplier/post', config).then((response) => {
+                if (response.data.message) {
+                    alert(response.data.message)
+                } else {
+                    // setUserType(response.data.user.usertype);
+                    setId(response.data.user._id)
+                    // alert(response.data.user._id)
+                    getOrderList(response.data.user._id)
+                }
+            })
+                .catch()
+        };
+        getusertype();
 
+
+        function getOrderList(id) {
 
 
             // 61532085ebf085108c3b9e68
             //6153205febf085108c3b9e66
 
-            axios.get(`http://localhost:8020/reply/get-orders/${userId}`)
+            axios.get(`http://localhost:8020/reply/get-orders/${id}`)
                 .then((response) => {
                     setOrderList(response.data.data);
                     // console.log(response.data)
@@ -64,7 +88,7 @@ export default function SupplierOrder() {
 
         }
 
-        getOrderList()
+
         // printorder()
 
     }, [])
@@ -95,7 +119,7 @@ export default function SupplierOrder() {
     //     // console.log(itemList)
     // }
 
-let count=0;
+    let count = 0;
 
     return (
         <div className='container mt-lg-4' align="center">
@@ -134,31 +158,29 @@ let count=0;
 
                                     {/*<TableCell>{items.quantity}</TableCell>*/}
 
-                                    <TableCell >
+                                    <TableCell>
 
                                         <ViewOrder
-                                            orderid = {orderList.ids}
-                                            supplierid={userId}
+                                            orderid={orderList.ids}
+                                            supplierid={id}
 
                                         /></TableCell>
 
-                                    <TableCell >
+                                    <TableCell>
 
                                         <SupplieReplyForm
-                                            orderid = {orderList.ids}
-                                            supplierid={userId}
+                                            orderid={orderList.ids}
+                                            supplierid={id}
 
-                                    /></TableCell>
-
-
+                                        /></TableCell>
 
 
                                     <TableCell>
-                                    <div hidden={orderList.Assign=='false'}>
-                                        you were assigned You can Deliver Now
-                                    </div>
+                                        <div hidden={orderList.Assign == 'false'}>
+                                            you were assigned You can Deliver Now
+                                        </div>
 
-                                        <div hidden={orderList.Assign=='true'}>
+                                        <div hidden={orderList.Assign == 'true'}>
                                             you were not assigned yet
                                         </div>
 
