@@ -87,4 +87,24 @@ router.route('/find/:id').get(async (req, res) => {
 })
 
 
+
+
+router.route('/assign/:id').put(async (req, res) => {
+    const id = req.params.id
+
+    console.log(id)
+
+    await Order.findByIdAndUpdate(id, req.body)
+        .then((response) => {
+            // res.json(response.ChooseSuppliers)
+
+            })
+
+            res.json("Order sent")
+        .catch((error) => {
+            res.status(500).send({error: error.message})
+        })
+})
+
+
 module.exports = router;

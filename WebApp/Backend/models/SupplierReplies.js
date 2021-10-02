@@ -19,9 +19,15 @@ const supplierReplySchema = new mongoose.Schema({
         type:mongoose.Schema.Types.ObjectId,
         required:false,
         ref:'orders'
+    },
+    Assign:{
+        type:String,
+        default:'false'
     }
 
 })
 
+
+//new assign attribute
 const SupplierReplyModel = mongoose.model('supplierReply' , supplierReplySchema);
 module.exports=SupplierReplyModel;
