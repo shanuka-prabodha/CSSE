@@ -18,6 +18,8 @@
     "express": "^4.17.1",
     "mongoose": "^5.13.7",
     "nodemon": "^2.0.13",
-    "underscore-contrib": "^0.3.0"
+    "underscore-contrib": "^0.3.0",
+    "stripe": "^8.176.0",
+    "uuid": "^8.3.2"
   }
 }

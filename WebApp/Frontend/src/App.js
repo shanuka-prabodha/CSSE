@@ -11,6 +11,8 @@ import OneOrder from './Pages/Orders/GetOneOrder/OneOrder';
 import ViewOneOrder from './Pages/Orders/GetOneOrder/ViewOneOrder';
 import SupplierMessages from "./Pages/Admin/SupplierMessages";
 import ViewMessages from "./Pages/Admin/ViewMessages";
+import Gateway from "./Pages/Payment/Gateway";
+import ReceivedOrders from "./Pages/Admin/ReceivedOrders";
 function App() {
   return (
     <div className="App">
@@ -27,6 +29,8 @@ function App() {
         <Route path="/approval/oneOrder" exact component={ViewOneOrder} />
         <Route path="/message" exact component={SupplierMessages} />
         <Route path="/view" exact component={ViewMessages} />
+        <Route path="/gateway" exact component={Gateway} />
+        <Route path="/received" exact component={ReceivedOrders} />
 
       </Router>
     </div>
