@@ -17,16 +17,12 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
-
-import ManageOders from '../../Pages/staffNewordersPage'
-import PendingOrders from '../../Pages/PendingOrders';
-import ButtonBar from '../ButtonBar/ButtonBar';
-
 import Test from '../../Pages/Test';
-import Test3 from '../../Pages/Orders/GetOneOrder/OneOrder';
-
-
-
+import OneOrder from '../../Pages/Orders/GetOneOrder/OneOrder';
+import ButtonBar from '../ButtonBar/ButtonBar';
+import PendingOrders from '../../Pages/PendingOrders';
+import { useHistory } from "react-router-dom";
+import ManageOders from '../../Pages/staffNewordersPage';
 
 const drawerWidth = 240;
 
@@ -95,10 +91,12 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
   }),
 );
 
-export default function MiniDrawer() {
+export default function Staffside() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
-  const [mytab , SetTab] = React.useState("1")
+  const [mytab, SetTab] = React.useState("1")
+  let history = useHistory();
+
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -107,6 +105,16 @@ export default function MiniDrawer() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+
+  const linksto = [
+    { label: 'REQUUEST', value: "/request" },
+    { label: 'APPROVAL', value: '/approval' },
+    { label: 'RECEVIED', value: '/recevied' },
+    { label: 'WAREHOUSE', value: '/warehouse' },
+    { label: 'SETTINGS', value: '/settings' },
+    { label: 'Home', value: '/' }
+  ]
+
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -138,14 +146,16 @@ export default function MiniDrawer() {
         </DrawerHeader>
         <Divider />
         <List>
-          {['New','REQUUEST', 'APPROVAL', 'RECEIVED', 'WAREHOUSE', 'SETTINGS'].map((text, index) => (
-            <ListItem button key={text} onClick={e=>{
-                SetTab(index)
+          {linksto.map((text, index) => (
+            <ListItem button key={text} onClick={e => {
+
+              history.push(text['value']);
+
             }}>
               <ListItemIcon>
                 {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
               </ListItemIcon>
-              <ListItemText primary={text} />
+              <ListItemText primary={text["label"]} />
             </ListItem>
           ))}
         </List>
@@ -153,9 +163,9 @@ export default function MiniDrawer() {
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
-            {mytab==0?<ManageOders/>:mytab==1?<Test3/>:<PendingOrders/>}
-                
 
+         <ManageOders/>
+         
       </Box>
     </Box>
   );

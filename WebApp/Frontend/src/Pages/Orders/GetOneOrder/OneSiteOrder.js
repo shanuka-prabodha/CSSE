@@ -46,7 +46,7 @@ const bull = (
     </Box>
 );
 
-export default function OneOrder(props) {
+export default function OneSiteOrder(props) {
     let history = useHistory();
     console.log(props.items)
     const [open, setOpen] = React.useState(false);
@@ -65,17 +65,17 @@ export default function OneOrder(props) {
     const handleAccept = () => {
 
         const state = {
-            AdminApproval: setapp
+            State: setapp
         }
 
-        axios.put(`http://localhost:8020/order/approve/${props.id}`, state).then((response) => {
+        axios.put(`http://localhost:8020/order/state/${props.id}`, state).then((response) => {
             console.log(response)
         }).catch((err) => {
             console.log(err)
         })
 
 
-        history.push("/approval")
+        history.push("/siteManagerConfirmOrder")
         setOpen(false);
     };
 
@@ -89,7 +89,7 @@ export default function OneOrder(props) {
         <Box sx={{ minWidth: 275 }}>
             <Card variant="outlined">
                 <CardContent>
-                    <Row style={{ marginLeft:"1px", paddingBottom: "10px", fontSize: "30px", fontWeight: "bold" }}>Purchase Order Requested</Row>
+                    <Row style={{ marginLeft:"1px", paddingBottom: "10px", fontSize: "30px", fontWeight: "bold" }}>Orders Acceptance</Row>
                 </CardContent>
                 <CardContent>
                     <Typography variant="h5" component="div">
@@ -128,8 +128,8 @@ export default function OneOrder(props) {
                         </Table>
                     </Typography>
                     <Typography style={{ float: "right" }}>
-                        <Button variant="contained" style={{ margin: "5px" }} disabled={props.status == "Pending" ? false : true} onClick={e => { handleClickOpen("Approve") }} >Approve</Button>
-                        <Button variant="contained" style={{ margin: "5px" }} disabled={props.status == "Pending" ? false : true} onClick={e => { handleClickOpen("Decline") }}>Decline</Button> 
+                        <Button variant="contained" style={{ margin: "5px" }} disabled={props.status == "Idle" ? false : true} onClick={e => { handleClickOpen("Received") }} >Approve</Button>
+                        <Button variant="contained" style={{ margin: "5px" }} disabled={props.status == "Idle" ? false : true} onClick={e => { handleClickOpen("Declined") }}>Decline</Button> 
                     </Typography>
                     <TableContainer component={Paper}>
                         <Table sx={{ minWidth: 650 }} aria-label="simple table">

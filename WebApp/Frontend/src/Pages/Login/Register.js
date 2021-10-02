@@ -78,7 +78,7 @@ export default function Register() {
                             labelText="Company name"
                             id="company"
                             type="text"
-                            placeholder="ABC"
+                            placeholder="Company Name"
                             value={company}
                             onChange={e=>{
                                 setCompany(e.target.value)
@@ -91,7 +91,7 @@ export default function Register() {
                             labelText="Location"
                             id="location"
                             type="text"
-                            placeholder="Galle"
+                            placeholder="Location"
                             value={location}
                             onChange={e=>{
                                 setLocation(e.target.value)
@@ -104,7 +104,7 @@ export default function Register() {
                             labelText="Type"
                             id="stype"
                             type="text"
-                            placeholder="type"
+                            placeholder="Item type"
                             value={stype}
                             onChange={e=>{
                                 setStype(e.target.value)
@@ -117,7 +117,7 @@ export default function Register() {
                             labelText="Phone"
                             id="phone"
                             type="text"
-                            placeholder="phone"
+                            placeholder="Phone"
                             value={phone}
                             onChange={e=>{
                                 setPhone(e.target.value)
