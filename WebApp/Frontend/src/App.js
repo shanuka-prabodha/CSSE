@@ -1,5 +1,4 @@
 import './App.css';
-
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Test from './Pages/Test';
 import Side from "./MyComponents/sidebar/side"
@@ -11,12 +10,14 @@ import OneOrder from './Pages/Orders/GetOneOrder/OneOrder';
 import ViewOneOrder from './Pages/Orders/GetOneOrder/ViewOneOrder';
 import SupplierMessages from "./Pages/Admin/SupplierMessages";
 import ViewMessages from "./Pages/Admin/ViewMessages";
+import Login from './Pages/Login/login';
+import Register from './Pages/Login/Register';
+
 function App() {
   return (
     <div className="App">
       <Router>
         <NavBar />
-
         <Route path="/approval" exact component={Side} />
         <Route path="/staffside" exact component={StaffSide} />
         <Route path="/manageOrder" exact component={ManageOders} />
@@ -27,6 +28,8 @@ function App() {
         <Route path="/approval/oneOrder" exact component={ViewOneOrder} />
         <Route path="/message" exact component={SupplierMessages} />
         <Route path="/view" exact component={ViewMessages} />
+        <Route path="/login" exact component={Login} />
+        <Route path="/register" exact component={Register} />
 
       </Router>
     </div>
