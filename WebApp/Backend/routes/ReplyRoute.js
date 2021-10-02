@@ -20,13 +20,13 @@ router.route('/get-orders/:id').get(async (req, res) => {
     let order = [];
     let set = {};
     let allItems = {};
-    await Reply.find({suppliers: req.params.id}).populate('orders', 'OrderDate DeliveryDate AdminApproval PassedState')
+    await Reply.find({suppliers: req.params.id}).populate('orders', 'OrderDate DeliveryDate AdminApproval PassedState Assign')
         .then((data) => {
             // res.status(200).send(data)
             // console.log(data)
             data.map((data) => {
                 // console.log(data.orders._id)
-                order.push({ids: data.orders._id, oDate: data.orders.OrderDate, dDate: data.orders.DeliveryDate})
+                order.push({ids: data.orders._id, oDate: data.orders.OrderDate, dDate: data.orders.DeliveryDate, Assign:data.orders.Assign})
 
             })
 
@@ -69,7 +69,7 @@ router.route('/get-orders/:id').get(async (req, res) => {
 router.route('/order').post(async (req, res) => {
 
     const Alldata = req.body;
-console.log(Alldata);
+    console.log(Alldata);
     const supplierId = req.body.supplierId
     const orderId = req.body.orderId
 
@@ -98,6 +98,38 @@ console.log(Alldata);
         })
         .catch(error => {
             res.status(500).send(error.message);
+        })
+})
+
+
+router.route('/read-reply/:id').get(async (req, res) => {
+    console.log(req.params.id)
+    await Reply.find({orders: req.params.id})
+        .then((reply) => {
+            res.json(reply)
+
+        })
+        .catch(error => {
+            res.status(500).send(error.message);
+        })
+})
+
+
+router.route('/assign/:id').put(async (req, res) => {
+    const id = req.params.id
+
+    console.log(req.body)
+
+
+    await Reply.findByIdAndUpdate(id, req.body)
+        .then((response) => {
+            // res.json(response.ChooseSuppliers)
+            res.json("Order sent")
+        })
+
+
+        .catch((error) => {
+            res.status(500).send({error: error.message})
         })
 })
 

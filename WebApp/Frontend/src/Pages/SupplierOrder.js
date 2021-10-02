@@ -29,7 +29,7 @@ export default function SupplierOrder() {
     let [itemList2, setItemList2] = useState({});
 
     let items = []
-    const userId= "61532085ebf085108c3b9e68";
+    const userId= "61531ff1ebf085108c3b9e61";
 
     useEffect(() => {
 
@@ -105,6 +105,7 @@ let count=0;
                             <StyledTableCell>Order Date</StyledTableCell>
                             <StyledTableCell>Due Date</StyledTableCell>
                             <StyledTableCell>Action</StyledTableCell>
+                            <StyledTableCell>Order state</StyledTableCell>
 
 
                         </TableRow>
@@ -117,6 +118,7 @@ let count=0;
                                     <TableCell>Order {count=count+1}</TableCell>
                                     <TableCell>{orderList.oDate}</TableCell>
                                     <TableCell>{orderList.dDate}</TableCell>
+
                                     {/*<TableCell>{items.quantity}</TableCell>*/}
                                     <TableCell>
 
@@ -126,7 +128,16 @@ let count=0;
 
                                     /></TableCell>
 
+                                    <TableCell>
+                                    <div hidden={orderList.Assign=='false'}>
+                                        you were assigned You can Deliver Now
+                                    </div>
 
+                                        <div hidden={orderList.Assign=='true'}>
+                                            you were not assigned yet
+                                        </div>
+
+                                    </TableCell>
                                 </TableRow>
                             ))
                         }

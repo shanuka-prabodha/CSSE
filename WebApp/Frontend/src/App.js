@@ -9,7 +9,8 @@ import ManageOders from './Pages/staffNewordersPage';
 import SupplierOrder from "./Pages/SupplierOrder";
 import OneOrder from './Pages/Orders/GetOneOrder/OneOrder';
 import ViewOneOrder from './Pages/Orders/GetOneOrder/ViewOneOrder';
-
+import SupplierMessages from "./Pages/Admin/SupplierMessages";
+import ViewMessages from "./Pages/Admin/ViewMessages";
 function App() {
   return (
     <div className="App">
@@ -24,6 +25,8 @@ function App() {
         <Route path="/OneOrder" exact component={OneOrder} />
         <Route path="/OneOrder" exact component={OneOrder} />
         <Route path="/approval/oneOrder" exact component={ViewOneOrder} />
+        <Route path="/message" exact component={SupplierMessages} />
+        <Route path="/view" exact component={ViewMessages} />
 
       </Router>
     </div>

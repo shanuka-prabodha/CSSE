@@ -31,6 +31,10 @@ const orderSchema = new mongoose.Schema({
         type: String,
         required: false
     },
+    Assign:{
+        type:String,
+        default:'false'
+    },
     ChooseSuppliers: [{
         type:mongoose.Schema.Types.ObjectId,
         required:false,
