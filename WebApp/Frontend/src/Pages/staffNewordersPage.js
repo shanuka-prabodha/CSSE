@@ -9,11 +9,11 @@ import {getOrder} from '../action/orderAction'
 import { Col, Row, CardBody, CardTitle } from "reactstrap"
 import CardContent from "@mui/material/CardContent";
 import ButtonToolBar from "../MyComponents/ButtonBar/ButtonToolBar";
-
+import { useHistory } from "react-router";
 
 const ManageOders =() =>{
 
-       
+    const history = useHistory();
         const [currentId,setCurrentId] = useState(null);
         
 
@@ -49,6 +49,7 @@ const ManageOders =() =>{
                     }}
                     approveClick={e => {
                         alert("Approve clicked")
+                        history.push("/supplier")
                     }}
                     pendingClick={e => {
                         alert("Pending clicked")

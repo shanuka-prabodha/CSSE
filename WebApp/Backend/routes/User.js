@@ -7,7 +7,7 @@ const cors = require('cors');
 const jwt = require('jsonwebtoken')
 
 const app = express()
-const saultRounds = 10
+
 
 app.use(cookieParser())
 app.use(bodyParser.urlencoded({extended: true}))

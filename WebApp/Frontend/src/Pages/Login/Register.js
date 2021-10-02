@@ -10,6 +10,10 @@ export default function Register() {
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const [company, setCompany] = useState("")
+    const [location, setLocation] = useState("")
+    const [stype, setStype] = useState("")
+    const [phone, setPhone] = useState("")
     const [confirm, setConfirm] = useState("")
 
     const history = useHistory()
@@ -20,6 +24,10 @@ export default function Register() {
         const newUser = {
             email,
             password,
+            company,
+            location,
+            stype,
+            phone
         }
         
         if(email == ""){
@@ -37,7 +45,7 @@ export default function Register() {
             //toast.warn('Password dosent match',{position: toast.POSITION.TOP_CENTER , autoClose:2000})
             alert("password not equal")
         }else {
-            axios.post("http://localhost:8020/user/register", newUser).then((response) => {
+            axios.post("http://localhost:8020/supplier/register", newUser).then((response) => {
                 if (response.data.Error) {
                     toast.error(response.data.Error,{position: toast.POSITION.TOP_CENTER , autoClose:2000})
                     document.getElementById("myForm").reset();
@@ -62,6 +70,59 @@ export default function Register() {
                         <Label>
                             Register Form
                         </Label>
+                    </div>
+
+
+                    <div style={{ margin: "10px", width: "400px" }}>
+                        <Input
+                            labelText="Company name"
+                            id="company"
+                            type="text"
+                            placeholder="ABC"
+                            value={company}
+                            onChange={e=>{
+                                setCompany(e.target.value)
+                            }}
+                        />
+                    </div>
+
+                    <div style={{ margin: "10px", width: "400px" }}>
+                        <Input
+                            labelText="Location"
+                            id="location"
+                            type="text"
+                            placeholder="Galle"
+                            value={location}
+                            onChange={e=>{
+                                setLocation(e.target.value)
+                            }}
+                        />
+                    </div>
+
+                    <div style={{ margin: "10px", width: "400px" }}>
+                        <Input
+                            labelText="Type"
+                            id="stype"
+                            type="text"
+                            placeholder="type"
+                            value={stype}
+                            onChange={e=>{
+                                setStype(e.target.value)
+                            }}
+                        />
+                    </div>
+
+                    <div style={{ margin: "10px", width: "400px" }}>
+                        <Input
+                            labelText="Phone"
+                            id="phone"
+                            type="text"
+                            placeholder="phone"
+                            value={phone}
+                            onChange={e=>{
+                                setPhone(e.target.value)
+                            }}
+                        />
                     </div>
 
                     <div style={{ margin: "10px", width: "400px" }}>
@@ -101,6 +162,10 @@ export default function Register() {
                         />
 
                     </div>
+
+
+
+
                     <div style={{ margin: "10px" }}>
                     </div>
                     <div style={{ margin: "10px", float: "right" }} >

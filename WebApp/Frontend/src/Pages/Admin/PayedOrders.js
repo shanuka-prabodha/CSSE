@@ -35,7 +35,7 @@ const useStyles = makeStyles({
 
 
 
-export default function ReceivedOrders() {
+export default function PayedOrders() {
 
     const [orderList, setOrderList] = useState([]);
     const [itemList, setItemList] = useState([]);
@@ -129,7 +129,7 @@ export default function ReceivedOrders() {
                         {
                             orderList.filter((orderList)=>{
 
-                                if(orderList.State=='Received'){
+                                if(orderList.State=='Payed'){
                                     return orderList
                                 }
 
@@ -165,7 +165,7 @@ export default function ReceivedOrders() {
                                     <TableCell>
                                         <Gateway
 
-                                        orderId={orderList._id}
+                                            orderId={orderList._id}
                                         />
                                     </TableCell>
 

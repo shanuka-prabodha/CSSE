@@ -109,6 +109,17 @@ export default function Gateway(props) {
         ).then((response) => {
             console.log(response.data);
             setUrl(response.data);
+
+            const OrderObject = {
+                State: 'Payed',
+
+            }
+            axios.put(`http://localhost:8020/order/state/${props.orderId}`, OrderObject)
+                .then((res) => {
+                    alert("Payed")
+                })
+
+
             setOpenSnack(true);
             handleClickOpen();
 
