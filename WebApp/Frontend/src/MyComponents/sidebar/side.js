@@ -115,9 +115,6 @@ export default function MiniDrawer() {
   ]
 
 
-
-
-
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
