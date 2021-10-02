@@ -8,8 +8,9 @@ import {useDispatch} from 'react-redux';
 import {getOrder,getApprovel} from '../action/orderAction'
 import { Col, Row, CardBody, CardTitle } from "reactstrap"
 import CardContent from "@mui/material/CardContent";
-import ButtonToolBar from "../MyComponents/ButtonBar/ButtonToolBar";
+import ButtonToolBar from "../MyComponents/ButtonBar/StaffButtonToolBar";
 import { useHistory } from "react-router";
+
 
 const ManageOders =() =>{
 
@@ -36,8 +37,14 @@ const ManageOders =() =>{
             <Row style={{ paddingLeft: "2%" }}>
                 <ButtonToolBar
                     allClick={e => {
-                        alert("All clicked")
+                        history.push("/manageOrder")
                     }}
+
+                    newClick={e => {
+                        history.push("/staffApproved",{approvel :'New'})
+                    }}
+
+                    
                     recevedClick={e => {
                         alert("Recevied clicked")
                     }}
@@ -53,7 +60,19 @@ const ManageOders =() =>{
 
                     }}
                     pendingClick={e => {
-                        alert("Pending clicked")
+                        history.push("/staffApproved",{approvel :'Pending'})
+                    }}
+
+                    messageClick={e => {
+                        history.push("/message")
+                    }}
+
+                    recevedClick={e => {
+                        history.push("/st-received")
+
+                    }}
+                    purchaseclick={e => {
+                        history.push("/st-payed")
                     }}
                 />
             </Row>

@@ -77,27 +77,42 @@ export default function SupplierMessages() {
             <Row style={{ paddingLeft: "2%" }}>
                 <StaffButtonToolBar
                     allClick={e => {
-                        alert("All clicked")
+                        history.push("/manageOrder")
                     }}
+
+                    newClick={e => {
+                        history.push("/staffApproved",{approvel :'New'})
+                    }}
+
+                    
+                    recevedClick={e => {
+                        alert("Recevied clicked")
+                    }}
+                    purchaseclick={e => {
+                        alert("Purchase clicked")
+                    }}
+                    deniedClick={e => {
+                        history.push("/staffApproved",{approvel :'Decline'})
+                    }}
+                    approveClick={e => {
+
+                        history.push("/staffApproved",{approvel :'Approve'})
+
+                    }}
+                    pendingClick={e => {
+                        history.push("/staffApproved",{approvel :'Pending'})
+                    }}
+
+                    messageClick={e => {
+                        history.push("/message")
+                    }}
+
                     recevedClick={e => {
                         history.push("/st-received")
 
                     }}
                     purchaseclick={e => {
                         history.push("/st-payed")
-                    }}
-                    deniedClick={e => {
-                        alert("Denied clicked")
-                    }}
-                    approveClick={e => {
-                        alert("Approve clicked")
-                        history.push("/supplier")
-                    }}
-                    pendingClick={e => {
-                        alert("Pending clicked")
-                    }}
-                    messageClick={e => {
-                        history.push("/message")
                     }}
                 />
             </Row>
