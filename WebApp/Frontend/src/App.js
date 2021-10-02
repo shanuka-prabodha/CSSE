@@ -24,6 +24,9 @@ import Gateway from "./Pages/Payment/Gateway";
 import ReceivedOrders from "./Pages/Admin/ReceivedOrders";
 import PayedOrders from "./Pages/Admin/PayedOrders";
 
+//staff components
+import StaffReceived from "./Pages/Staff/StaffReceived";
+import StaffPayed from "./Pages/Staff/StaffPayed";
 
 function App() {
   return (
@@ -53,6 +56,10 @@ function App() {
         <Route path="/gateway" exact component={Gateway} />
         <Route path="/received" exact component={ReceivedOrders} />
         <Route path="/payed" exact component={PayedOrders} />
+
+
+        <Route path="/st-received" exact component={StaffReceived} />
+        <Route path="/st-payed" exact component={StaffPayed} />
 
 
 

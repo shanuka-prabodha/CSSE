@@ -168,9 +168,11 @@ export default function SupplierOrder() {
 
                                     <TableCell>
 
+
                                         <SupplieReplyForm
                                             orderid={orderList.ids}
                                             supplierid={id}
+                                            assign={orderList.Assign}
 
                                         /></TableCell>
 

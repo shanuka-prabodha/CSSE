@@ -10,6 +10,9 @@ import {withStyles,makeStyles} from "@material-ui/core/styles";
 import {useHistory} from "react-router";
 import axios from "axios";
 import Button from "@material-ui/core/Button";
+import {Row} from "reactstrap";
+import ButtonToolBar from "../../MyComponents/ButtonBar/ButtonToolBar";
+import StaffButtonToolBar from "../../MyComponents/ButtonBar/StaffButtonToolBar";
 
 const StyledTableCell = withStyles((theme) => ({
     head: {
@@ -69,6 +72,38 @@ export default function SupplierMessages() {
     let index=0;
     return (
         <div className='container mt-lg-4' align="center">
+
+            <Row style={{ paddingLeft: "2%", paddingBottom: "10px", fontSize: "30px", fontWeight: "bold" }}>Purchase Order Requested</Row>
+            <Row style={{ paddingLeft: "2%" }}>
+                <StaffButtonToolBar
+                    allClick={e => {
+                        alert("All clicked")
+                    }}
+                    recevedClick={e => {
+                        history.push("/st-received")
+
+                    }}
+                    purchaseclick={e => {
+                        history.push("/st-payed")
+                    }}
+                    deniedClick={e => {
+                        alert("Denied clicked")
+                    }}
+                    approveClick={e => {
+                        alert("Approve clicked")
+                        history.push("/supplier")
+                    }}
+                    pendingClick={e => {
+                        alert("Pending clicked")
+                    }}
+                    messageClick={e => {
+                        history.push("/message")
+                    }}
+                />
+            </Row>
+
+
+
             <TableContainer component={Paper}>
                 <Table  style={{ backgroundColor: "#FFFFFF7C",color: "white" }}>
                     <TableHead>

@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import StripeCheckout from "react-stripe-checkout";
 import axios from "axios";
 import {withStyles} from '@material-ui/core/styles';
@@ -74,6 +74,35 @@ function Alert(props) {
 
 export default function Gateway(props) {
 
+    const [cost, setCost] = useState(0);
+
+    useEffect(() => {
+
+        axios.get(`http://localhost:8020/reply/get-estimate/${props.orderId}`).then((res) => {
+            console.log(res.data)
+
+            res.data.map((sup) => {
+
+                setCost(sup.EstimateCost)
+            })
+
+        })
+            .catch(error => {
+                alert(error)
+            })
+    }, [])
+
+
+
+
+
+
+
+
+
+
+
+
     const [open, setOpen] = React.useState(false);
     const [helperText, setHelperText] = React.useState('');
     const [url, setUrl] = React.useState('');
@@ -135,7 +164,7 @@ export default function Gateway(props) {
             <StripeCheckout
                 stripeKey="pk_test_51JaknZDzPOTabH3bLDtBmfFfsYDg057QbmBQ5SHZQhqKGeUjPu5h84c021phRizQ9Em44pBN9D6b1MtXhuK4xEm200G2qiRSnV"
                 token={makePayment}
-                amount={product.price * 100}
+                amount={parseFloat(cost) * 100}
                 name="Enter your card details"
                 // billingAddress
                 // shippingAddress
