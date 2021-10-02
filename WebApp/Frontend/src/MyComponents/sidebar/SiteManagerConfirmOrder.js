@@ -22,6 +22,7 @@ import OneOrder from '../../Pages/Orders/GetOneOrder/OneOrder';
 import ButtonBar from '../ButtonBar/ButtonBar';
 import PendingOrders from '../../Pages/PendingOrders';
 import { useHistory } from "react-router-dom";
+import SiteConfirm from "../../Pages/siteManagerConfirm"
 
 
 const drawerWidth = 240;
@@ -91,7 +92,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
   }),
 );
 
-export default function MiniDrawer() {
+export default function SiteManagerConfirmOrder() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const [mytab, SetTab] = React.useState("1")
@@ -164,8 +165,8 @@ export default function MiniDrawer() {
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
 
-         <PendingOrders/>
-         
+        <SiteConfirm />
+
       </Box>
     </Box>
   );

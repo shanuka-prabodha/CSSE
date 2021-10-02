@@ -57,10 +57,7 @@ const ManageOders =() =>{
                 />
             </Row>
         </CardContent>
-
-            
-
-
+        
                     <Container>
                         
                         <Grid container justify ="space-between" alignItems="stretch" spacing ={3}   >
