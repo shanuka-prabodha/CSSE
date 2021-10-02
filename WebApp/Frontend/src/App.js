@@ -7,18 +7,28 @@ import NavBar from './MyComponents/navbar/Navbar';
 import StaffSide from "./MyComponents/sidebar/staffside";
 import ManageOders from './Pages/staffNewordersPage';
 import SupplierOrder from "./Pages/SupplierOrder";
+
+import staffeOderManage from  "./Pages/staffOderManage";
+
+
+
+
 import OneOrder from './Pages/Orders/GetOneOrder/OneOrder';
 import ViewOneOrder from './Pages/Orders/GetOneOrder/ViewOneOrder';
 import SupplierMessages from "./Pages/Admin/SupplierMessages";
 import ViewMessages from "./Pages/Admin/ViewMessages";
 import Gateway from "./Pages/Payment/Gateway";
 import ReceivedOrders from "./Pages/Admin/ReceivedOrders";
+
 function App() {
   return (
     <div className="App">
       <Router>
         <NavBar />
 
+      <Route path="/side" exact component={Side}/>
+      
+      <Route path="/staffeOder" exact component={staffeOderManage}/>
         <Route path="/approval" exact component={Side} />
         <Route path="/staffside" exact component={StaffSide} />
         <Route path="/manageOrder" exact component={ManageOders} />
@@ -31,6 +41,7 @@ function App() {
         <Route path="/view" exact component={ViewMessages} />
         <Route path="/gateway" exact component={Gateway} />
         <Route path="/received" exact component={ReceivedOrders} />
+
 
       </Router>
     </div>
