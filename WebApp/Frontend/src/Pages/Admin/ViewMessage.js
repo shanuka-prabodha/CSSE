@@ -24,6 +24,7 @@ import TableRow from "@material-ui/core/TableRow";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import {useLocation} from "react-router-dom";
+import SupplierName from "../Supplier/SupplierName";
 
 const StyledTableCell = withStyles((theme) => ({
     head: {
@@ -108,9 +109,7 @@ export default function ViewMessage(props) {
 
 
 
-    const location = useLocation();
-
-    const orderId = location.state.orderId;
+    const orderId = props.orderId;
 
 
     const [replyList, setReplyList] = useState([]);
@@ -165,7 +164,7 @@ export default function ViewMessage(props) {
 
 
 
-    setOpen(false);
+
 
     return (
 
@@ -177,7 +176,7 @@ export default function ViewMessage(props) {
                 </Alert>
             </Snackbar>
 
-            <Button disabled={props.assign=='true'} variant="outlined" color="secondary" onClick={handleClickOpen}>
+            <Button  variant="outlined" color="secondary" onClick={handleClickOpen}>
                 View Replies
             </Button>
             <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
@@ -188,7 +187,93 @@ export default function ViewMessage(props) {
                 <form onSubmit={onSubmit}>
 
                     <DialogContent dividers>
+                        <div className='container mt-lg-4' align="center" style={{width: "950px", height: "400px"}}>
 
+                            {/*{count}*/}
+
+                            <TableContainer component={Paper}>
+                                <Table style={{backgroundColor: "#FFFFFF7C", color: "white"}}>
+
+                                    <TableHead>
+                                        <TableRow>
+                                            <StyledTableCell> ID</StyledTableCell>
+                                            {/*<StyledTableCell>supplier id</StyledTableCell>*/}
+                                            <StyledTableCell>Supplier Name</StyledTableCell>
+                                            {/*<StyledTableCell>Unit Cost</StyledTableCell>*/}
+                                            <StyledTableCell>Message</StyledTableCell>
+                                            <StyledTableCell>Total cost</StyledTableCell>
+                                            <StyledTableCell>Action</StyledTableCell>
+
+
+                                        </TableRow>
+                                    </TableHead>
+                                    <TableBody>
+                                        <TableRow>
+                                            <TableCell hidden={count==''}>{count}</TableCell>
+                                        </TableRow>
+
+
+                                        {
+                                            replyList.map(replyList => (
+
+
+                                                <TableRow>
+
+
+                                                    <TableCell>{replyList.orders}</TableCell>
+                                                    {/*<TableCell>{index=index+1}</TableCell>*/}
+
+                                                    {/*<TableCell>{replyList.suppliers}</TableCell>*/}
+
+                                                    <TableCell>
+                                                        <SupplierName
+                                                            id={replyList.suppliers}
+                                                        />
+                                                    </TableCell>
+
+
+                                                    <TableCell hidden={replyList.Message == 'empty'}>
+                                        <textarea hidden={replyList.Message == 'empty'}
+                                                  style={{width: '350px', height: '50px'}} value={replyList.Message}/>
+                                                        {/*<textarea hidden={replyList.Message!='empty'} style={{width: '350px', height: '50px'}} value={"No reply yet"}/>*/}
+                                                    </TableCell>
+
+                                                    <TableCell hidden={replyList.Message != 'empty'}>
+                                                        {"No reply yet"}
+                                                    </TableCell>
+
+
+                                                    {/*<TableCell hidden={replyList.Message=='empty'}  >*/}
+                                                    {/*    <textarea hidden={replyList.Message=='empty'}  style={{width: '350px', height: '50px'}} value={ replyList.Message}/>*/}
+                                                    {/*</TableCell>*/}
+
+
+                                                    <TableCell
+                                                        hidden={replyList.Message == 'empty'}>Rs. {replyList.EstimateCost}</TableCell>
+                                                    <TableCell hidden={replyList.Message != 'empty'}></TableCell>
+                                                    {/*<TableCell hidden={replyList.EstimateCost != null}>Rs. {replyList.EstimateCost}</TableCell>*/}
+
+
+                                                    {/*<TableCell>{itemList.unitPrice}</TableCell>*/}
+                                                    <TableCell>
+                                                        <Button variant="outlined" color="secondary"
+                                                                disabled={replyList.Assign == 'true' || replyList.Message == 'empty'}
+                                                                onClick={() => onSubmit(replyList.suppliers, replyList._id)}>Assign
+                                                            Order</Button>
+                                                        {/*<AssignSupplier*/}
+
+                                                        {/*    orderId={replyList.orders}*/}
+                                                        {/*/>*/}
+                                                    </TableCell>
+                                                </TableRow>
+                                            ))
+                                        }
+
+
+                                    </TableBody>
+                                </Table>
+                            </TableContainer>
+                        </div>
 
 
                     </DialogContent>
