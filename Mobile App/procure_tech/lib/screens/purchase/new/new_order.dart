@@ -4,22 +4,37 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:procure_tech/models/DataModel.dart';
 import 'package:http/http.dart' as http;
+import 'package:procure_tech/screens/purchase/accessories/productCard.dart';
+
+import 'add_products.dart';
 
 class PurchaseOrder extends StatefulWidget {
   @override
   _PurchaseOrderState createState() => _PurchaseOrderState();
 }
 
-Future<DataModel?> submitData(String title, String today) async {
+Future<DataModel?> submitData(
+    String title, String today, String selectedDay, var productDetails) async {
   var response = await http.post(
     //Uri.http('172.31.0.1:8020', 'order/create'),
-    Uri.parse('http://172.31.0.1:8020/order/create'),
+    Uri.parse('http://172.25.80.1:8020/order/create'),
     headers: {'Content-Type': 'application/json'},
-    body: jsonEncode({"Description": title, "OrderDate": today}),
+    body: jsonEncode({
+      "Description": title,
+      "OrderDate": today,
+      "DeliveryDate": selectedDay,
+      "AdminApproval": "New",
+      "PassedState": "New",
+      "items": productDetails,
+    }),
   );
-  print(title);
-  var data = response.body;
-  print(data);
+
+  await http.delete(Uri.parse('http://172.25.80.1:8020/product/delete'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      });
+
+  print(productDetails);
 
   if (response.statusCode == 201) {
     String responseString = response.body;
@@ -30,137 +45,177 @@ Future<DataModel?> submitData(String title, String today) async {
 
 class _PurchaseOrderState extends State<PurchaseOrder> {
   String today = DateFormat('yyyy-MM-dd').format(DateTime.now());
+  DateTime selectedDay = DateTime.now();
   late DataModel _dataModel;
   TextEditingController titleController = TextEditingController();
   late Widget buildProductAdd;
+
+  var _productDetails = [];
+
+  Future<Null> selectedTimePicker(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: selectedDay,
+      lastDate: DateTime(2100),
+      firstDate: DateTime.now(),
+    );
+
+    if (picked != null && picked != selectedDay) {
+      setState(() {
+        selectedDay = picked;
+      });
+    }
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getPurchases();
+  }
+
+  void getPurchases() async {
+    final response =
+        await http.get(Uri.parse('http://172.25.80.1:8020/product/product'));
+    final jsonData = jsonDecode(response.body) as List;
+    print(jsonData);
+
+    setState(() {
+      _productDetails = jsonData;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
     return Container(
-      child: Column(
-        children: [
-          TextFormField(
-            decoration: const InputDecoration(
-              hintText: 'Enter your email',
-            ),
-            controller: titleController,
-          ),
-          Text("Submitted date: $today"),
-          Text("Due date:"),
-          Row(
+      child: SingleChildScrollView(
+        physics: ScrollPhysics(),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+          child: Column(
             children: [
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: OutlinedButton(
-                    onPressed: () async {
-                      String title = titleController.text;
-                      DataModel? data = await submitData(title, today);
-                      setState(() {
-                        if (data != null) {
-                          _dataModel = data;
-                        }
-                      });
-                    },
-                    child: Text("Submit"),
+              TextFormField(
+                decoration: const InputDecoration(
+                  hintText: 'Title',
+                ),
+                controller: titleController,
+              ),
+              Text("Submitted date: $today"),
+              Row(
+                children: [
+                  Text("Due date:"),
+                  Text(DateFormat('yyyy-MM-dd').format(selectedDay)),
+                  FlatButton(
+                      onPressed: () {
+                        selectedTimePicker(context);
+                      },
+                      child: Text('Date Pick'))
+                ],
+              ),
+              Row(
+                children: [
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: OutlinedButton(
+                        onPressed: () async {
+                          String title = titleController.text;
+                          DataModel? data = await submitData(
+                              title,
+                              today,
+                              DateFormat('yyyy-MM-dd').format(selectedDay),
+                              _productDetails);
+                          setState(() {
+                            if (data != null) {
+                              _dataModel = data;
+                            }
+                          });
+                        },
+                        child: Text("Submit"),
+                      ),
+                    ),
                   ),
-                ),
-              ),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: OutlinedButton(
-                    onPressed: () => {},
-                    child: Text("Button2"),
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: OutlinedButton(
+                        onPressed: () => {},
+                        child: Text("Clear"),
+                      ),
+                    ),
                   ),
-                ),
+                  Expanded(
+                    child: FloatingActionButton(
+                      onPressed: () => {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => AddProducts(),
+                          ),
+                        ),
+                        setState(() {
+                          getPurchases();
+                        })
+                      },
+                      child: Icon(Icons.add),
+                    ),
+                  ),
+                ],
               ),
-              Expanded(
-                child: FloatingActionButton(
-                  onPressed: () => {
-                    showModalBottomSheet(
-                        context: context,
-                        builder: (BuildContext context) => ProductAdd())
-                  },
-                  child: Icon(Icons.add),
-                ),
-              ),
+              ListView.builder(
+                  physics: NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: _productDetails.length,
+                  itemBuilder: (context, i) {
+                    final product = _productDetails[i];
+                    return ProductCard(product);
+                  }),
             ],
           ),
-        ],
+        ),
       ),
     );
   }
 }
 
-class ProductAdd extends StatelessWidget {
-  const ProductAdd({Key? key}) : super(key: key);
+/*
+class AddedProducts extends StatefulWidget {
+  const AddedProducts({Key? key}) : super(key: key);
+
+  @override
+  _AddedProductsState createState() => _AddedProductsState();
+}
+
+class _AddedProductsState extends State<AddedProducts> {
+  var _productDetails = [];
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getPurchases();
+  }
+
+  void getPurchases() async {
+    final response =
+        await http.get(Uri.parse('http://172.25.80.1:8020/product/product'));
+    final jsonData = jsonDecode(response.body) as List;
+    print(jsonData);
+
+    setState(() {
+      _productDetails = jsonData;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Container(
-        padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 40.0),
-        decoration: BoxDecoration(
-          color: Color(0xff3c4042),
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(40.0),
-            topRight: Radius.circular(40.0),
-          ),
-        ),
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Text(
-                'Add a new Product.',
-                style: TextStyle(
-                  fontSize: 28.0,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 10.0),
-              child: TextField(
-                decoration: InputDecoration(
-                  hintText: 'Product name',
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 10.0),
-              child: TextField(
-                decoration: InputDecoration(hintText: 'Product quantity'),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 20.0, bottom: 10.0),
-              child: Text(
-                'Total price',
-                style: TextStyle(
-                  fontSize: 28.0,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 40.0),
-              child: Text(
-                'Rs. 200.00',
-                style: TextStyle(
-                  fontSize: 35.0,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-            ),
-            ElevatedButton(
-              onPressed: () {},
-              child: Text('Add product'),
-            )
-          ],
-        ),
-      ),
-    );
+    return ListView.builder(
+        itemCount: _productDetails.length,
+        itemBuilder: (context, i) {
+          final product = _productDetails[i];
+          return ProductCard(product);
+        });
   }
 }
+*/

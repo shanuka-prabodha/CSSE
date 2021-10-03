@@ -13,32 +13,23 @@ const orderSchema = new mongoose.Schema({
 
     DeliveryDate: {
         type: String,
-        required: true
+        required: false
     },
-    AdminApproval: {
+    AdminApproval: {//
         type: String,
-        required: true
+        required: false
     },
     Priority: {
         type: String,
-        required: true
+        required: false
     },
-    PassedState: {
+    PassedState: { //
         type: String,
-        required: true
+        required: false
     },
     ReferenceNo: {
         type: String,
         required: false
-    },
-    Assign:{
-        type:String,
-        default:'false'
-    }
-    ,
-    State:{
-        type:String,
-        default:'Idle'
     },
     ChooseSuppliers: [{
         type:mongoose.Schema.Types.ObjectId,
@@ -51,19 +42,10 @@ const orderSchema = new mongoose.Schema({
         required:false,
         ref:'suppliers'
     },
-    items: [{
-        itemName: {type: mongoose.Schema.Types.ObjectId , required:false},
-        quantity: {type: Number, required: false},
-        name: {type: String, required: false},
-        unitPrice: {type: String, required: false},
-        discription: {type: String, required: false},
-    }],
+    items: []
 
 
-},
 
-{
-    timestamps: true
 })
 
 const OrderModel = mongoose.model('orders', orderSchema);
