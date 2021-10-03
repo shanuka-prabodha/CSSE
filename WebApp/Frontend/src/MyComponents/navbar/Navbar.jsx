@@ -31,7 +31,7 @@ function NavBar(props) {
                         <Nav.Link href="/" style={linkStyle} className="mx-3">HOME</Nav.Link>
                         <Nav.Link href="/approval" style={linkStyle} className="mx-3">Approved</Nav.Link>
                         <Nav.Link href="/staffside" style={linkStyle} className="mx-3">StaffSide</Nav.Link>
-                        <Nav.Link href="/manageOrder" style={linkStyle} className="mx-3">manageOder</Nav.Link>
+                        <Nav.Link href="/StaffAlloder" style={linkStyle} className="mx-3">manageOder</Nav.Link>
                         <Nav.Link href="/staffeOder" style={linkStyle} className="mx-3">make Requsition</Nav.Link>
                         <Nav.Link href="/admin" style={linkStyle} className="mx-3">CONTACT</Nav.Link>
                         <Nav.Link href="/productManage" style={linkStyle} className="mx-3">Admin product manage</Nav.Link>

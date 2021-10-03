@@ -1,4 +1,3 @@
-
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
@@ -23,7 +22,7 @@ import axios from 'axios'
 
 import { useLocation } from "react-router-dom";
 
-import SupplierCard from '../MyComponents/supplierCard/supplierCard'
+import SupplierCard from '../MyComponents/supplierCard/AssignSupplierCrad'
 import {Grid} from '@material-ui/core'
 import { useHistory } from "react-router";
 
@@ -246,43 +245,32 @@ const eventposts = useSelector((state)=>state.orderReducer)
             </Typography>
 </div>)})}
 
-              <Typography>
-                 Recommend Suppliers
-                </Typography>
-
-              
-
-                <Select 
-
-options={Options}
-onChange={onSupplierselect}
-isMulti
-
-/>
 <Grid container justify ="space-between" spacing ={3}>
 
     <Grid item xs ={12} sm ={7} style = {{width:"fit-content"}}>
-    <Grid  container alignItems ="stretch" spacing={3} style={{height:'fit-content', width :'170%',overflow:'auto',marginTop:"10px"}}>
-{
-    cardsuppliers.map((sup ,index)=>(
+    <Grid  container alignItems ="stretch" spacing={3} style={{height:'fit-content', width :'170%',marginTop:"10px"}}>
+    { eventposts.map((post,index)=>{ 
+                    return(
+                        <div>
+
+        {post.ChooseSuppliers.map((sup,ind) =>(
+
         <Row>
-        <Grid key={index} item xs={12} sm={4} >
+        <Grid key={ind} item xs={12} sm={4} >
         <SupplierCard sup = {sup}/>
         </Grid>
         </Row>
-    ))
 
-}
+        ))}
+
+    </div>)})}
 </Grid>
 </Grid>
 </Grid>
 
 
-            <Typography style={{ float: "right" }} onClick={()=>EventDispatch( updateStaffOrder(orderID,{ChooseSuppliers:selectedSupplier}),
-                    window.location.reload(false))}>
-                <Button>Submit for Approve</Button>
-               
-            </Typography>
+
+           
             { eventposts.map((post,index)=>{ 
                     return(
                         <div>
@@ -328,7 +316,7 @@ isMulti
             </div>
             )})}
 
-         
+           
         </CardContent>
 
     </React.Fragment>

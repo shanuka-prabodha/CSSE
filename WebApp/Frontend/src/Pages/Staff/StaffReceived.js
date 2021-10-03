@@ -112,11 +112,11 @@ export default function StaffReceived() {
             <Row style={{ paddingLeft: "2%" }}>
                 <StaffButtonToolBar
                   allClick={e => {
-                    history.push("/manageOrder")
+                   
                 }}
 
                 newClick={e => {
-                    history.push("/staffApproved",{approvel :'New'})
+                    history.push("/manageOrder",{approvel :'New'})
                 }}
 
                 

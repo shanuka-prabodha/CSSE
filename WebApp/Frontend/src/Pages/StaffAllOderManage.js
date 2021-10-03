@@ -16,8 +16,7 @@ const ManageOders =() =>{
 
     const history = useHistory();
 
-    const location = useLocation();
-    const approve = location.state.approvel
+  
         const [currentId,setCurrentId] = useState(null);
         
 
@@ -25,7 +24,7 @@ const ManageOders =() =>{
         const dispatch =useDispatch();
         useEffect(()=>{
 
-            dispatch(getApprovel(approve));             
+            dispatch(getOrder());             
 
         },[currentId,dispatch]);
 

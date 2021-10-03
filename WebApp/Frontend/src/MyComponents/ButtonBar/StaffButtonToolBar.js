@@ -5,11 +5,7 @@ import ButtonBar from './ButtonBar'
 const StaffButtonBar = (props)=>{
 
     const btnList = [
-        {
-            btnText:"All",
-            btnColor:"info",
-            onClick:props.allClick
-        },
+      
 
         {
             btnText:"New",

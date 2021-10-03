@@ -29,8 +29,8 @@ const OderApprovedCard = ({post,approve})=>{
     const history = useHistory();
 
 
-    const navigateRequsition=()=>{
-        history.push("/staffeOder",{
+    const navigateView=()=>{
+        history.push("/StaffApprovedOderManage",{
             oderID :post._id
         })
     }
@@ -77,7 +77,9 @@ const OderApprovedCard = ({post,approve})=>{
                 <div style={{marginTop:'10%'}}>
                
                 
-                    <Button style={{border:"1px solid blue" , marginLeft:"-15px" , padding:"5px",color:'blue' }} onClick={()=>navigateRequsition()}  hidden ={approve == 'Approve' ? true :false}    > Delete</Button>
+                <Button style={{border:"1px solid blue" , marginLeft:"-15px" , padding:"5px",color:'blue' }} onClick={()=>navigateView()} >view</Button>
+
+                    <Button style={{border:"1px solid blue" , marginLeft:"20px" , padding:"5px",color:'blue' }}   hidden ={approve == 'Approve' ? true :false}    > Delete</Button>
                 
             
             </div>
