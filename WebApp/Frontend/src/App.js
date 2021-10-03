@@ -23,7 +23,8 @@ import SiteManagerConfirmOrder from "./MyComponents/sidebar/SiteManagerConfirmOr
 import ViewOneSiteOrder from './Pages/Orders/GetOneOrder/ViewOneSiteOrder';
 
 import StaffeApprovedOders from "./Pages/StaffOder/StaffApprovelPage";
-
+import './Style/home.css'
+import Homepage from "./Pages/HomePage/HomePage";
 //staff components
 import StaffReceived from "./Pages/Staff/StaffReceived";
 import StaffPayed from "./Pages/Staff/StaffPayed";
@@ -33,9 +34,9 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <NavBar />
+        {/*<NavBar />*/}
 
-
+        <Route path="/" exact component={Login} />
        
         <Route path="/staffeOder" exact component={staffeOderManage} />
         <Route path="/siteManagerConfirmOrder" exact component={SiteManagerConfirmOrder} />

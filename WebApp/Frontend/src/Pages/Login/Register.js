@@ -63,10 +63,11 @@ export default function Register() {
 
 
     return (
-        <div style={{ width: "max", display: "flex", justifyContent: "center", alignItems: "center" }}>
-            <div style={{ margin: "150px", background: "yellow" }}>
+        <div className="heroSection" style={{ width: "max", display: "flex", justifyContent: "center", alignItems: "center" }}>
+            <div style={{  }} className='item-card'>
                 <form className="form">
-                    <div style={{ marginBottom: "20px", font: "caption", fontWeight: "bold", marginTop: "20px", paddingLeft: "20px" }}>
+                    <div style={{ marginBottom: "20px", font: "caption", fontWeight: "bold", marginTop: "20px",
+                        paddingLeft: "20px" ,textAlign:'center' ,fontSize:'30px' }}>
                         <Label>
                             Register Form
                         </Label>

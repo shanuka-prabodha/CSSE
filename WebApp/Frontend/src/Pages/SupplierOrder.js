@@ -10,11 +10,13 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import SupplieReplyForm from "./SupplieReplyForm";
 import ViewOrder from "./Supplier/ViewOrder";
+import Navbar from '../Pages/HomePage/NavBar/NavBar'
+
 
 const _ = require('underscore-contrib');
 const StyledTableCell = withStyles((theme) => ({
     head: {
-        backgroundColor: '#FA334E',
+        backgroundColor: '#1976D2',
         color: theme.palette.common.white,
     },
     body: {
@@ -122,84 +124,92 @@ export default function SupplierOrder() {
     let count = 0;
 
     return (
-        <div className='container mt-lg-4' align="center">
-
-            SUPPLIER
-            {/*<button onClick={printorder}>Click here</button>*/}
-
-            {/*{*/}
-            {/*    orderList.map((value) => (*/}
 
 
-            <TableContainer component={Paper}>
+        <div><Navbar/>
+            <div className='heroSection'>
 
 
-                <Table style={{backgroundColor: "#FFFFFF7C", color: "white"}}>
-                    <TableHead>
-                        <TableRow>
-                            <StyledTableCell>ID</StyledTableCell>
-                            <StyledTableCell>Order Date</StyledTableCell>
-                            <StyledTableCell>Due Date</StyledTableCell>
-                            <StyledTableCell>View Order</StyledTableCell>
-                            <StyledTableCell>Send Estimation</StyledTableCell>
-                            <StyledTableCell>Order state</StyledTableCell>
+                <div className='container mt-lg-4 ' align="center">
+
+                    SUPPLIER
+                    {/*<button onClick={printorder}>Click here</button>*/}
+
+                    {/*{*/}
+                    {/*    orderList.map((value) => (*/}
 
 
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {
-                            orderList.map(orderList => (
-                                <TableRow key={orderList}>
-                                    <TableCell>{orderList.ids}</TableCell>
-                                    {/*<TableCell>Order {count=count+1}</TableCell>*/}
-                                    <TableCell>{orderList.oDate}</TableCell>
-                                    <TableCell>{orderList.dDate}</TableCell>
-
-                                    {/*<TableCell>{items.quantity}</TableCell>*/}
-
-                                    <TableCell>
-
-                                        <ViewOrder
-                                            orderid={orderList.ids}
-                                            supplierid={id}
-
-                                        /></TableCell>
-
-                                    <TableCell>
+                    <TableContainer component={Paper}>
 
 
-                                        <SupplieReplyForm
-                                            orderid={orderList.ids}
-                                            supplierid={id}
-                                            assign={orderList.Assign}
+                        <Table style={{backgroundColor: "#FFFFFF7C", color: "white"}}>
+                            <TableHead>
+                                <TableRow>
+                                    <StyledTableCell>ID</StyledTableCell>
+                                    <StyledTableCell>Order Date</StyledTableCell>
+                                    <StyledTableCell>Due Date</StyledTableCell>
+                                    <StyledTableCell>View Order</StyledTableCell>
+                                    <StyledTableCell>Send Estimation</StyledTableCell>
+                                    <StyledTableCell>Order state</StyledTableCell>
 
-                                        /></TableCell>
 
-
-                                    <TableCell>
-                                        <div hidden={orderList.Assign == 'false'}>
-                                            you were assigned You can Deliver Now
-                                        </div>
-
-                                        <div hidden={orderList.Assign == 'true'}>
-                                            you were not assigned yet
-                                        </div>
-
-                                    </TableCell>
                                 </TableRow>
-                            ))
-                        }
+                            </TableHead>
+                            <TableBody>
+                                {
+                                    orderList.map(orderList => (
+                                        <TableRow key={orderList}>
+                                            <TableCell>{orderList.ids}</TableCell>
+                                            {/*<TableCell>Order {count=count+1}</TableCell>*/}
+                                            <TableCell>{orderList.oDate}</TableCell>
+                                            <TableCell>{orderList.dDate}</TableCell>
+
+                                            {/*<TableCell>{items.quantity}</TableCell>*/}
+
+                                            <TableCell>
+
+                                                <ViewOrder
+                                                    orderid={orderList.ids}
+                                                    supplierid={id}
+
+                                                /></TableCell>
+
+                                            <TableCell>
 
 
-                    </TableBody>
-                </Table>
-            </TableContainer>
+                                                <SupplieReplyForm
+                                                    orderid={orderList.ids}
+                                                    supplierid={id}
+                                                    assign={orderList.Assign}
 
-            {/*    ))*/}
-            {/*}*/}
+                                                /></TableCell>
 
 
+                                            <TableCell>
+                                                <div hidden={orderList.Assign == 'false'}>
+                                                    you were assigned You can Deliver Now
+                                                </div>
+
+                                                <div hidden={orderList.Assign == 'true'}>
+                                                    you were not assigned yet
+                                                </div>
+
+                                            </TableCell>
+                                        </TableRow>
+                                    ))
+                                }
+
+
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
+
+                    {/*    ))*/}
+                    {/*}*/}
+
+
+                </div>
+            </div>
         </div>
     )
 }

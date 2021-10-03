@@ -13,6 +13,7 @@ import Button from "@material-ui/core/Button";
 import {Row} from "reactstrap";
 import ButtonToolBar from "../../MyComponents/ButtonBar/ButtonToolBar";
 import StaffButtonToolBar from "../../MyComponents/ButtonBar/StaffButtonToolBar";
+import ViewMessage from "./ViewMessage";
 
 const StyledTableCell = withStyles((theme) => ({
     head: {
@@ -150,7 +151,11 @@ export default function SupplierMessages() {
                                         <Button variant="contained" color="secondary" onClick={() => navigateView(orderList._id)}>View Replies</Button>
 
                                     </TableCell>
-
+                                    {/*<TableCell>*/}
+                                    {/*    <ViewMessage*/}
+                                    {/*    orderId={orderList._id}*/}
+                                    {/*    />*/}
+                                    {/*</TableCell>*/}
 
                                 </TableRow>
                             ))

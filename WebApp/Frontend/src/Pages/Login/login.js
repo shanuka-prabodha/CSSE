@@ -36,7 +36,7 @@ export default function Login() {
                     //toast.success('Login Success!', { position: toast.POSITION.TOP_CENTER, autoClose: 1000 })
                     localStorage.setItem("token", response.data.token)
 
-                        window.location.assign("/approval");
+                        window.location.assign("/supplier");
                    
                 }
             }).catch((err) => {
@@ -53,10 +53,11 @@ export default function Login() {
 
 
     return (
-        <div style={{ width: "max", display: "flex", justifyContent: "center", alignItems: "center" }}>
-            <div style={{ margin: "150px", background: "yellow" }}>
-                <form className="form">
-                    <div style={{ marginBottom: "20px", font: "caption", fontWeight: "bold", marginTop: "20px", paddingLeft: "20px" }}>
+        <div className="heroSection" style={{ width: "max", display: "flex", justifyContent: "center", alignItems: "center" }}>
+            <div style={{ margin: "150px"}} className='item-card'>
+                <form className="form ">
+                    <div style={{ marginBottom: "20%", font: "caption", fontWeight: "bold",
+                        marginTop: "20px", paddingLeft: "20px" ,textAlign:'center' ,fontSize:'30px'  }}>
                         <Label>
                             Login Form
                         </Label>
