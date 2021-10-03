@@ -204,23 +204,25 @@ function verifyToken(req , res , next){
     }
 }
 
+app.get('/assignsupplier/:id',async(req,res)=>{
 
+   let Assignsupplier = req.params.id;
 
+   console.log("AssignSupplierID")
+    console.log(Assignsupplier);
 
-
-////////////
-app.get("/getOne/:id",(req, res)=>{
-
-    const id = req.params.id
-    User.findOne({riders:id}).populate('riders', 'riderName')
-        .then((data)=>{
-            res.send(data)
-
-        }).catch((error)=>{
-        res.status(500).send(error.message)
+    Supplier.findById(Assignsupplier)
+    .then((supplier)=>{
+            
+        res.json(supplier)
+    }) 
+    .catch(error=>{
+        res.status(500).send(error);
     })
-
 })
+
+
+
 
 
 

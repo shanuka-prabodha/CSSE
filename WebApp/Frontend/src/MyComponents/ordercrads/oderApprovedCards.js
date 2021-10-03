@@ -6,7 +6,7 @@ import {Grid,CircularProgress} from '@material-ui/core'
 import Styles from './styles'
 
 
-const OderApprovedPosts = ({approve})=>{  
+const AssignSupplierCard = ({approve})=>{  
     const eventposts = useSelector((state)=>state.orderReducer) 
     const classes = Styles();
     console.log(eventposts);
@@ -37,4 +37,4 @@ console.log(approve)
     
 }
 
-export default OderApprovedPosts;
+export default AssignSupplierCard;

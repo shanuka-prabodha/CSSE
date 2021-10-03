@@ -28,6 +28,9 @@ import StaffeApprovedOders from "./Pages/StaffOder/StaffApprovelPage";
 import StaffReceived from "./Pages/Staff/StaffReceived";
 import StaffPayed from "./Pages/Staff/StaffPayed";
 
+import ApprovedOderManage from "./Pages/staffApprovemangeorder"
+import StaffAllOderMange from './Pages/StaffAllOderManage'
+
 
 function App() {
   return (
@@ -63,6 +66,10 @@ function App() {
 
         <Route path="/st-received" exact component={StaffReceived} />
         <Route path="/st-payed" exact component={StaffPayed} />
+
+        <Route path="/StaffApprovedOderManage" exact component={ApprovedOderManage} />
+        <Route path="/StaffAlloder" exact component={StaffAllOderMange} />
+
 
 
 

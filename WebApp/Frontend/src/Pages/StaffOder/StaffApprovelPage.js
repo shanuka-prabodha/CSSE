@@ -38,12 +38,9 @@ const ManageOders =() =>{
             <Row style={{ paddingLeft: "2%", paddingBottom: "10px", fontSize: "30px", fontWeight: "bold" }}>Purchase Order Requested</Row>
             <Row style={{ paddingLeft: "2%" }}>
             <ButtonToolBar
-                    allClick={e => {
-                        history.push("/manageOrder")
-                    }}
-
+                
                     newClick={e => {
-                        history.push("/staffApproved",{approvel :'New'})
+                        history.push("/manageOrder",{approvel :'New'})
                     }}
 
                     
