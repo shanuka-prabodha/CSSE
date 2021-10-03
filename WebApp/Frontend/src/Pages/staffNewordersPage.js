@@ -33,7 +33,8 @@ const ManageOders =() =>{
 
     return (
 
-        <div style={{}} style={{}}>
+        <div className='heroSection'>
+            <div className='container mt-lg-4' align="center">
 
 <CardContent>
             <Row style={{ paddingLeft: "2%", paddingBottom: "10px", fontSize: "30px", fontWeight: "bold" }}>Purchase Order Requested</Row>
@@ -92,6 +93,7 @@ const ManageOders =() =>{
                         </Grid>
                     </Container>
            
+           </div>
            </div>
     );
 }

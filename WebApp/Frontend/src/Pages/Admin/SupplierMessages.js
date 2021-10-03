@@ -72,6 +72,8 @@ export default function SupplierMessages() {
 
     let index=0;
     return (
+
+        <div className='heroSection'>
         <div className='container mt-lg-4' align="center">
 
             <Row style={{ paddingLeft: "2%", paddingBottom: "10px", fontSize: "30px", fontWeight: "bold" }}>Purchase Order Requested</Row>
@@ -163,6 +165,7 @@ export default function SupplierMessages() {
                     </TableBody>
                 </Table>
             </TableContainer>
+        </div>
         </div>
     )
 }

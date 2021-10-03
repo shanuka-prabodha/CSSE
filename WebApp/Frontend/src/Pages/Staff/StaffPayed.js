@@ -102,6 +102,8 @@ export default function StaffPayed() {
     let count = 0;
     const history = useHistory();
     return (
+
+        <div className='heroSection'>
         <div className='container mt-lg-4' align="center">
 
             <Row style={{ paddingLeft: "2%", paddingBottom: "10px", fontSize: "30px", fontWeight: "bold" }}>Purchase Order Requested</Row>
@@ -239,6 +241,7 @@ export default function StaffPayed() {
             {/*}*/}
 
 
+        </div>
         </div>
     )
 }
