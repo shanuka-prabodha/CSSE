@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -13,8 +14,16 @@ class PurchaseOrder extends StatefulWidget {
   _PurchaseOrderState createState() => _PurchaseOrderState();
 }
 
-Future<DataModel?> submitData(
-    String title, String today, String selectedDay, var productDetails) async {
+Future<DataModel?> submitData(String title, String today, String selectedDay,
+    var productDetails, var supplier, String dropdownValue, int total) async {
+  String admin;
+
+  if (total > 10000) {
+    admin = "New";
+  } else {
+    admin = "else";
+  }
+
   var response = await http.post(
     //Uri.http('172.31.0.1:8020', 'order/create'),
     Uri.parse('http://172.25.80.1:8020/order/create'),
@@ -23,9 +32,12 @@ Future<DataModel?> submitData(
       "Description": title,
       "OrderDate": today,
       "DeliveryDate": selectedDay,
-      "AdminApproval": "New",
+      "AdminApproval": admin,
       "PassedState": "New",
       "items": productDetails,
+      "AssignSupplier": supplier,
+      "Priority": dropdownValue,
+      "TotalPrice": total
     }),
   );
 
@@ -51,6 +63,13 @@ class _PurchaseOrderState extends State<PurchaseOrder> {
   late Widget buildProductAdd;
 
   var _productDetails = [];
+  var _supplierDetails = [];
+
+  String dropdownValue = 'High';
+
+  int total = 0;
+
+  var supplier;
 
   Future<Null> selectedTimePicker(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
@@ -72,27 +91,54 @@ class _PurchaseOrderState extends State<PurchaseOrder> {
     // TODO: implement initState
     super.initState();
     getPurchases();
+    getSupliers();
   }
 
-  void getPurchases() async {
+  Future<List> getPurchases() async {
     final response =
         await http.get(Uri.parse('http://172.25.80.1:8020/product/product'));
     final jsonData = jsonDecode(response.body) as List;
-    print(jsonData);
 
     setState(() {
       _productDetails = jsonData;
+    });
+    getTotal();
+    return _productDetails;
+  }
+
+  void getTotal() async {
+    final responseTota =
+        await http.get(Uri.parse('http://172.25.80.1:8020/product/total'));
+
+    //Map<String, dynamic> jsonDataSup = json.decode(responseTota.body);
+    int data = json.decode(responseTota.body)["total"];
+    total = data;
+
+    print(total);
+  }
+
+  void getSupliers() async {
+    final responseSup = await http
+        .get(Uri.parse('http://172.25.80.1:8020/supplier/readSupplier'));
+    //final jsonDataSup = jsonDecode(responseSup.body) as List;
+
+    Map<String, dynamic> jsonDataSup = json.decode(responseSup.body);
+    List<dynamic> data = jsonDataSup["data"];
+
+    setState(() {
+      _supplierDetails = data;
     });
   }
 
   @override
   Widget build(BuildContext context) {
     final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
     return Container(
       child: SingleChildScrollView(
         physics: ScrollPhysics(),
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+          padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 30.0),
           child: Column(
             children: [
               TextFormField(
@@ -101,17 +147,43 @@ class _PurchaseOrderState extends State<PurchaseOrder> {
                 ),
                 controller: titleController,
               ),
-              Text("Submitted date: $today"),
+              SizedBox(
+                height: 50.0,
+              ),
+              Text(
+                "Submitted date: $today",
+                style: TextStyle(color: Color(0xFF4849AB), fontSize: 20.0),
+              ),
+              SizedBox(
+                height: 30.0,
+              ),
               Row(
                 children: [
-                  Text("Due date:"),
-                  Text(DateFormat('yyyy-MM-dd').format(selectedDay)),
-                  FlatButton(
-                      onPressed: () {
-                        selectedTimePicker(context);
-                      },
-                      child: Text('Date Pick'))
+                  Text(
+                    "Due date:",
+                    style: TextStyle(color: Color(0xFF4849AB), fontSize: 20.0),
+                  ),
+                  Text(DateFormat('yyyy-MM-dd').format(selectedDay),
+                      style:
+                          TextStyle(color: Color(0xFF4849AB), fontSize: 20.0)),
                 ],
+              ),
+              FlatButton(
+                onPressed: () {
+                  selectedTimePicker(context);
+                },
+                child: Container(
+                  width: 50.0,
+                  height: 50.0,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: Color(0xFF4849AB),
+                  ),
+                  child: Icon(
+                    Icons.calendar_today,
+                    color: Colors.white,
+                  ),
+                ),
               ),
               Row(
                 children: [
@@ -125,7 +197,10 @@ class _PurchaseOrderState extends State<PurchaseOrder> {
                               title,
                               today,
                               DateFormat('yyyy-MM-dd').format(selectedDay),
-                              _productDetails);
+                              _productDetails,
+                              supplier,
+                              dropdownValue,
+                              total);
                           setState(() {
                             if (data != null) {
                               _dataModel = data;
@@ -163,14 +238,52 @@ class _PurchaseOrderState extends State<PurchaseOrder> {
                   ),
                 ],
               ),
-              ListView.builder(
-                  physics: NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  itemCount: _productDetails.length,
-                  itemBuilder: (context, i) {
-                    final product = _productDetails[i];
-                    return ProductCard(product);
-                  }),
+              Text('Priority: '),
+              DropdownButton<String>(
+                hint: Text('Select Priority'),
+                value: dropdownValue,
+                elevation: 16,
+                onChanged: (String? newValue) {
+                  setState(() {
+                    dropdownValue = newValue!;
+                  });
+                },
+                items: <String>['High', 'Medium', 'Low']
+                    .map<DropdownMenuItem<String>>((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value),
+                  );
+                }).toList(),
+              ),
+              DropdownButton(
+                hint: Text('Select Supplier'),
+                items: _supplierDetails.map((list) {
+                  return DropdownMenuItem(
+                    child: Text(list['Name']),
+                    value: list['_id'].toString(),
+                  );
+                }).toList(),
+                onChanged: (value) {
+                  setState(() {
+                    supplier = value;
+                  });
+                  print(supplier);
+                },
+                value: supplier,
+              ),
+              Text("Total: $total"),
+              RefreshIndicator(
+                onRefresh: getPurchases,
+                child: ListView.builder(
+                    physics: AlwaysScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemCount: _productDetails.length,
+                    itemBuilder: (context, i) {
+                      final product = _productDetails[i];
+                      return ProductCard(product);
+                    }),
+              ),
             ],
           ),
         ),

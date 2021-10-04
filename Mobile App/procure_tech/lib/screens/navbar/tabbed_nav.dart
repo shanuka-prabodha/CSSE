@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:procure_tech/screens/purchase/new/new_order.dart';
+import 'package:procure_tech/screens/purchase/pending/approved.dart';
+import 'package:procure_tech/screens/purchase/pending/decline.dart';
+import 'package:procure_tech/screens/purchase/pending/new.dart';
 import 'package:procure_tech/screens/purchase/pending/pending.dart';
 
 class TabbedNavBar extends StatelessWidget {
@@ -11,6 +14,7 @@ class TabbedNavBar extends StatelessWidget {
       initialIndex: 0,
       length: 5,
       child: Scaffold(
+        backgroundColor: Color(0xFFECEBF1),
         appBar: AppBar(
           title: Center(
             child: Text("Procure App"),
@@ -76,20 +80,18 @@ class TabbedNavBar extends StatelessWidget {
         ),
         body: TabBarView(
           children: [
+            PurchaseOrder(),
             Center(
-              child: PurchaseOrder(),
+              child: NewSection(),
             ),
             Center(
               child: PendingSection(),
             ),
             Center(
-              child: Text("Tab pending view"),
+              child: ApproveSection(),
             ),
             Center(
-              child: Text("Tab 3 view"),
-            ),
-            Center(
-              child: Text("Tab 4 view"),
+              child: DeclineSection(),
             ),
           ],
         ),
