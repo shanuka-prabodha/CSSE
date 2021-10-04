@@ -106,6 +106,8 @@ console.log("fgggggggggggggggg")
      console.log(orderID)
  const dispatch =useDispatch();
 const EventDispatch = useDispatch();
+
+
 useEffect(()=>{
 
     dispatch(getOneOrder(orderID));
@@ -126,7 +128,6 @@ useEffect(()=>{
             })
             */
             setSupliers(response.data.data)
-
             response.data.data.map((supplier ,index)=>{
                 data = data.concat({
                    label: supplier['Name'],
@@ -150,7 +151,9 @@ useEffect(()=>{
 
 //console.log(selectedSupplier)
 const eventposts = useSelector((state)=>state.orderReducer) 
-
+console.log("hey")
+    console.log(eventposts)
+    console.log("hey")
 //console.log(eventposts);
 
 //console.log(Options)

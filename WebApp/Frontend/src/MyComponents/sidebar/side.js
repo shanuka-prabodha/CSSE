@@ -22,7 +22,7 @@ import OneOrder from '../../Pages/Orders/GetOneOrder/OneOrder';
 import ButtonBar from '../ButtonBar/ButtonBar';
 import PendingOrders from '../../Pages/PendingOrders';
 import { useHistory } from "react-router-dom";
-
+import Button from "@mui/material/Button";
 
 const drawerWidth = 240;
 
@@ -115,9 +115,12 @@ export default function MiniDrawer() {
     { label: 'Home', value: '/' }
   ]
 
+  function logout(){
+    window.location.assign("/login")
+  }
 
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: 'flex' }} >
       <CssBaseline />
       <AppBar position="fixed" open={open}>
         <Toolbar>
@@ -136,6 +139,12 @@ export default function MiniDrawer() {
           <Typography variant="h6" noWrap component="div">
             Dasboard
           </Typography>
+          <div style={{ flex: "2" }}>
+                </div>
+          <Typography variant="h6" noWrap component="div" style={{float:"right"}}>
+            <Button variant="contained" color="secondary" onClick={logout}>Log Out</Button>
+          </Typography>
+          
         </Toolbar>
       </AppBar>
       <Drawer variant="permanent" open={open}>
