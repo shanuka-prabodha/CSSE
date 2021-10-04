@@ -23,6 +23,7 @@ import ButtonBar from '../ButtonBar/ButtonBar';
 import PendingOrders from '../../Pages/PendingOrders';
 import { useHistory } from "react-router-dom";
 import ManageOders from '../../Pages/staffNewordersPage';
+import Button from "@mui/material/Button";
 
 const drawerWidth = 240;
 
@@ -91,6 +92,10 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
   }),
 );
 
+function logout(){
+  window.location.assign("/login")
+}
+
 export default function Staffside() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -135,6 +140,11 @@ export default function Staffside() {
           </IconButton>
           <Typography variant="h6" noWrap component="div">
             Dasboard
+          </Typography>
+          <div style={{ flex: "2" }}>
+                </div>
+          <Typography variant="h6" noWrap component="div" style={{float:"right"}}>
+            <Button variant="contained" color="secondary" onClick={logout}>Log Out</Button>
           </Typography>
         </Toolbar>
       </AppBar>

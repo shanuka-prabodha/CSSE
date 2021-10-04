@@ -86,8 +86,9 @@ export default function OneOrder(props) {
     }
 
     return (
-        <Box sx={{ minWidth: 275 }}>
-            <Card variant="outlined">
+      <div>
+        <Box sx={{ minWidth: 275 }} >
+            <Card variant="outlined" style={{background:"linear-gradient(to bottom right, rgba(0, 0, 0, .65), rgba(0, 0, 0, .65))", color:"white"}}>
                 <CardContent>
                     <Row style={{ marginLeft:"1px", paddingBottom: "10px", fontSize: "30px", fontWeight: "bold" }}>Purchase Order Requested</Row>
                 </CardContent>
@@ -107,7 +108,7 @@ export default function OneOrder(props) {
                                     <TableCell></TableCell>
                                 </TableRow>
                             </TableHead>
-                            <TableBody>
+                            <TableBody style={{color:"white"}}>
                                 <tr>
                                     <td>Due Date</td>
                                     <td>{props.duedate}</td>
@@ -185,6 +186,6 @@ export default function OneOrder(props) {
                 </DialogActions>
             </Dialog>
         </Box>
-
+        </div>                                      
     );
 }
