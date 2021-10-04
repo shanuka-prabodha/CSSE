@@ -11,6 +11,10 @@ export default(orderReducer = [],action)=>{
 
                     case 'FETCH_APPROVEL' :
             return action.payload;
+
+            case 'DELETE' :
+                return orderReducer.filter((order)=>order._id !== action.payload._id );
+
         default:
             return orderReducer;    
     }

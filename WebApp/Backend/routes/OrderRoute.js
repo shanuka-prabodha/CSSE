@@ -184,7 +184,21 @@ router.route('/readApprovelOder').get(async(req,res)=>{
 })
 
 
+router.route("/delete/:id").delete(async(req,res)=>{
+    let orderID = req.params.id;
+    if(req.params && req.params.id){
 
+        await Order.findByIdAndDelete(orderID)
+
+        .then(data=>{
+             
+         res.status(200).send("order deleted successfully")
+     }) 
+     .catch(error=>{
+         res.status(500).send(error.message);
+     })
+    }
+});
 
 
 

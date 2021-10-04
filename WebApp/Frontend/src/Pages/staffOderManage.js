@@ -26,6 +26,7 @@ import { useLocation } from "react-router-dom";
 import SupplierCard from '../MyComponents/supplierCard/supplierCard'
 import {Grid} from '@material-ui/core'
 import { useHistory } from "react-router";
+import Alert from '@mui/material/Alert';
 
 function createData(code, name, desc, qnty, unit, price) {
     return { code, name, desc, qnty, unit, price };
@@ -58,6 +59,7 @@ const bull = (
 export default function OutlinedCard() {
 
     const history = useHistory();
+    const [check, setCheck] = useState("")
 
     const [currentId,setCurrentId] = useState(null);
     const [SelectedSupliers,setSelectedSupliers] = useState([])
@@ -265,11 +267,11 @@ isMulti
     <Grid  container alignItems ="stretch" spacing={3} style={{height:'fit-content', width :'170%',overflow:'auto',marginTop:"10px"}}>
 {
     cardsuppliers.map((sup ,index)=>(
-        <Row>
+        
         <Grid key={index} item xs={12} sm={4} >
         <SupplierCard sup = {sup}/>
         </Grid>
-        </Row>
+        
     ))
 
 }
@@ -278,8 +280,40 @@ isMulti
 </Grid>
 
 
-            <Typography style={{ float: "right" }} onClick={()=>EventDispatch( updateStaffOrder(orderID,{ChooseSuppliers:selectedSupplier}),
-                    window.location.reload(false))}>
+
+<div className="form-group" style={{textAlign:"left", marginTop:"5%"}}>
+                                    <input type="checkbox" value="true" id="flexCheckDefault" onChange={(event) => {
+                                        setCheck(event.target.value)
+                                    }} />
+                                    <label style={{ marginLeft: "2%" , color: "black" , marginTop: "3%"} }>
+                                        Warehouse availblility checked for whole order.
+                                    </label>
+                                    <br />
+                                </div>
+
+
+            <Typography style={{ float: "right" }} onClick={()=>{
+            
+            if (check != "true") {
+               
+                    
+                    alert("Confirm the Warehouse Availability")  
+                    
+                  
+            }
+            
+            else if(selectedSupplier.length == 0 ){
+                
+               alert("Cannot procced without a Reccomended") 
+                  
+
+            }
+            else{
+            EventDispatch( updateStaffOrder(orderID,{ChooseSuppliers:selectedSupplier}),
+                    window.location.reload(false))
+            }   
+            }
+                    }>
                 <Button>Submit for Approve</Button>
                
             </Typography>
@@ -295,7 +329,7 @@ isMulti
                             <TableCell align="center">Description</TableCell>
                             <TableCell align="center">Quantity</TableCell>
                             <TableCell align="center">Unit Price</TableCell>
-                            <TableCell align="center">Check Item</TableCell>
+                            
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -309,7 +343,7 @@ isMulti
                                 }}
                             >
                                 <TableCell component="th" scope="row">
-                                    {item.itemName}
+                                    {item._id}
                                 </TableCell>
                                 <TableCell align="center">{item.name}</TableCell>
                                 <TableCell align="center">{item.discription}</TableCell>

@@ -255,11 +255,11 @@ const eventposts = useSelector((state)=>state.orderReducer)
 
         {post.ChooseSuppliers.map((sup,ind) =>(
 
-        <Row>
+        
         <Grid key={ind} item xs={12} sm={4} >
         <SupplierCard sup = {sup}/>
         </Grid>
-        </Row>
+       
 
         ))}
 

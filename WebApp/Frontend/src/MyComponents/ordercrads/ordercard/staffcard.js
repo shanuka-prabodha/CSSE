@@ -24,7 +24,7 @@ mesuringUnit:"",
 selectedfile:""*/
 
 
-const OderCard = ({post,setCurrentId})=>{
+const OderCard = ({post,approve})=>{
     
     const EventDispatch = useDispatch();
     const history = useHistory();
@@ -37,6 +37,7 @@ const OderCard = ({post,setCurrentId})=>{
     }
 
  
+    console.log(approve)
 
     return(
 
@@ -78,7 +79,7 @@ const OderCard = ({post,setCurrentId})=>{
                 <div style={{marginTop:'10%'}}>
                
                 
-                    <Button style={{border:"1px solid blue" , marginLeft:"-15px" , padding:"5px",color:'blue' }} onClick={()=>navigateRequsition()}> Make Requistion</Button>
+                    <Button style={{border:"1px solid blue" , marginLeft:"-15px" , padding:"5px",color:'blue' }} onClick={()=>navigateRequsition()} hidden ={approve == 'New' ? false :true} > Make Requistion</Button>
                 
             
             </div>

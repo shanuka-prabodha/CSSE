@@ -44,3 +44,13 @@ export const getApprovel = (id)=>async(dispatch)=>{
         console.log(error)
     }
 }
+
+
+export const deleteorder = (id)=> async(dispatch)=>{
+    try{
+        await api.deleteOder(id);
+        dispatch({type:'DELETE',payload:id});
+    }catch(error){
+        console.log(error);
+    }
+}

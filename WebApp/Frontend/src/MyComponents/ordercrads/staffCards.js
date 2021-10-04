@@ -6,10 +6,12 @@ import {Grid,CircularProgress} from '@material-ui/core'
 import Styles from './styles'
 
 
-const OderPosts = ({setCurrentId})=>{  
+const OderPosts = ({approve})=>{  
     const eventposts = useSelector((state)=>state.orderReducer) 
     const classes = Styles();
     console.log(eventposts);
+
+    console.log(approve)
 
 
     return(
@@ -23,7 +25,7 @@ const OderPosts = ({setCurrentId})=>{
                     eventposts.map((post)=>(
                         <div key={post._id} item xs={12} sm={4}  style={{width :'150%'}}>
 
-                            <Posts  post={post} setCurrentId={setCurrentId} />
+                            <Posts  post={post} approve={approve} />
                         
                         </div>
 
