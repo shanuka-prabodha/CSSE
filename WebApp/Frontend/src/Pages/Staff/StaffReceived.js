@@ -201,8 +201,8 @@ export default function StaffReceived() {
                             }).map(orderList => (
                                 <TableRow key={orderList}>
 
-                                    {/*<TableCell>Order {count=count+1}</TableCell>*/}
-                                    <TableCell>{orderList._id}</TableCell>
+                                    <TableCell>Order {count=count+1}</TableCell>
+                                    {/*<TableCell>{orderList._id}</TableCell>*/}
                                     {/*<TableCell>ORDER  {index=index+1}</TableCell>*/}
 
                                     <TableCell>{orderList.DeliveryDate}</TableCell>

@@ -23,7 +23,7 @@ class _PendingSectionState extends State<PendingSection> {
 
   void getPurchases() async {
     final response =
-        await http.get(Uri.parse('http://172.25.80.1:8020/order/readOder'));
+        await http.get(Uri.parse('http://172.19.80.1:8020/order/readOder'));
     final jsonData = jsonDecode(response.body) as List;
     print(jsonData);
 
