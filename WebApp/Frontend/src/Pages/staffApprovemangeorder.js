@@ -204,6 +204,10 @@ const eventposts = useSelector((state)=>state.orderReducer)
                     purchaseclick={e => {
                         history.push("/st-payed")
                     }}
+
+                    lowcostClick={e => {
+                        history.push("/staffApproved",{approvel :'else'})
+                    }}
                 />
             </Row>
         </CardContent>

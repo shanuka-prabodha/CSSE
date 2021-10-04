@@ -22,6 +22,7 @@ export default function BasicCard ({sup}) {
 console.log(sup)
 const dispatch =useDispatch();
 
+
 useEffect(()=>{
 
     dispatch(getSupplier(sup));             
@@ -32,16 +33,10 @@ useEffect(()=>{
 
 const eventposts = useSelector((state)=>state.supplierReducer) 
 
-console.log(eventposts)
+console.log(eventposts.Name)
     
   return (
     
-
-   
-       
-
- 
-
     <Card sx={{ minWidth: 275 }} style={{backgroundColor:'whitesmoke'}} >
       <CardContent>
         <Typography variant="h6" component="div">

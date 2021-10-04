@@ -56,9 +56,6 @@ app.use('/supplier',Supplier)
 const Payment = require('./routes/PaymentRoute')
 app.use('/payment',Payment)
 
-const Product = require('./routes/productRoute')
-app.use('/product',Product);
-
 
 
 
