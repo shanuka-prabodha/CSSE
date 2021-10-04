@@ -160,8 +160,8 @@ export default function SupplierOrder() {
                                 {
                                     orderList.map(orderList => (
                                         <TableRow key={orderList}>
-                                            <TableCell>{orderList.ids}</TableCell>
-                                            {/*<TableCell>Order {count=count+1}</TableCell>*/}
+                                            {/*<TableCell>{orderList.ids}</TableCell>*/}
+                                            <TableCell>ORD{count=count+1}</TableCell>
                                             <TableCell>{orderList.oDate}</TableCell>
                                             <TableCell>{orderList.dDate}</TableCell>
 

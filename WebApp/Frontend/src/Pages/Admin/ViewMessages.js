@@ -44,7 +44,7 @@ export default function ViewMessages() {
     const [replyList, setReplyList] = useState([]);
     let [count, setCount] = useState('');
 
-let index=0;
+    let index = 0;
     useEffect(() => {
 
 
@@ -96,29 +96,29 @@ let index=0;
 
         <div className='heroSection'>
 
-        <div className='container mt-lg-4' align="center">
+            <div className='container mt-lg-4' align="center">
 
-            {/*{count}*/}
+                {/*{count}*/}
 
-            <TableContainer component={Paper}>
-                <Table style={{backgroundColor: "#FFFFFF7C", color: "white"}}>
+                <TableContainer component={Paper}>
+                    <Table style={{backgroundColor: "#FFFFFF7C", color: "white"}}>
 
-                    <TableHead>
-                        <TableRow>
-                            <StyledTableCell> ID</StyledTableCell>
-                            {/*<StyledTableCell>supplier id</StyledTableCell>*/}
-                            <StyledTableCell>Supplier Name</StyledTableCell>
-                            {/*<StyledTableCell>Unit Cost</StyledTableCell>*/}
-                            <StyledTableCell>Message</StyledTableCell>
-                            <StyledTableCell>Total cost</StyledTableCell>
-                            <StyledTableCell>Action</StyledTableCell>
+                        <TableHead>
+                            <TableRow>
+                                <StyledTableCell> ID</StyledTableCell>
+                                {/*<StyledTableCell>supplier id</StyledTableCell>*/}
+                                <StyledTableCell>Supplier Name</StyledTableCell>
+                                {/*<StyledTableCell>Unit Cost</StyledTableCell>*/}
+                                <StyledTableCell>Message</StyledTableCell>
+                                <StyledTableCell>Total cost</StyledTableCell>
+                                <StyledTableCell>Action</StyledTableCell>
 
 
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        <TableRow>
-                            <TableCell hidden={count==''}>{count}</TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            <TableRow>
+                                <TableCell hidden={count == ''}>{count}</TableCell>
                             </TableRow>
 
 
@@ -129,8 +129,8 @@ let index=0;
                                     <TableRow>
 
 
-                                        <TableCell>{replyList.orders}</TableCell>
-                                        {/*<TableCell>{index=index+1}</TableCell>*/}
+                                        {/*<TableCell>{replyList.orders}</TableCell>*/}
+                                        <TableCell>ORD{index = index + 1}</TableCell>
 
                                         {/*<TableCell>{replyList.suppliers}</TableCell>*/}
 
@@ -142,8 +142,8 @@ let index=0;
 
 
                                         <TableCell hidden={replyList.Message == 'empty'}>
-                                        <TextareaAutosize auto hidden={replyList.Message == 'empty'}
-                                                  style={{width: '350px'}} value={replyList.Message}/>
+                                            <TextareaAutosize auto hidden={replyList.Message == 'empty'}
+                                                              style={{width: '350px'}} value={replyList.Message}/>
                                             {/*<textarea hidden={replyList.Message!='empty'} style={{width: '350px', height: '50px'}} value={"No reply yet"}/>*/}
                                         </TableCell>
 
@@ -179,12 +179,12 @@ let index=0;
                             }
 
 
-                    </TableBody>
-                </Table>
-            </TableContainer>
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+            </div>
         </div>
-        </div>
-)
+    )
 }
 
 

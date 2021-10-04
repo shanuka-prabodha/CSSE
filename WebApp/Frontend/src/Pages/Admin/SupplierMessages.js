@@ -132,9 +132,8 @@ export default function SupplierMessages() {
                             <StyledTableCell>Order date</StyledTableCell>
                             <StyledTableCell>Delivery date</StyledTableCell>
                             <StyledTableCell>Priority</StyledTableCell>
-                            {/*<StyledTableCell>Unit Cost</StyledTableCell>*/}
                             <StyledTableCell>Action</StyledTableCell>
-
+                            {/*<StyledTableCell>Unit Cost</StyledTableCell>*/}
 
                         </TableRow>
                     </TableHead>
@@ -144,8 +143,8 @@ export default function SupplierMessages() {
                         {
                             orderList.map(orderList => (
                                 <TableRow>
-                                    <TableCell>{orderList._id}</TableCell>
-                                    {/*<TableCell>ORDER  {index=index+1}</TableCell>*/}
+                                    {/*<TableCell>{orderList._id}</TableCell>*/}
+                                    <TableCell>ORDER  {index=index+1}</TableCell>
 
                                     <TableCell>{orderList.DeliveryDate}</TableCell>
                                     <TableCell>{orderList.OrderDate}</TableCell>
