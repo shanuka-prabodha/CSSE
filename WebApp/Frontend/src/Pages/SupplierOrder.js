@@ -81,7 +81,8 @@ export default function SupplierOrder() {
             axios.get(`http://localhost:8020/reply/get-orders/${id}`)
                 .then((response) => {
                     setOrderList(response.data.data);
-                    // console.log(response.data)
+                    console.log("shanuka")
+                    console.log(response.data.data)
 
                 })
                 .catch((error) => {
@@ -188,6 +189,7 @@ export default function SupplierOrder() {
                                             <TableCell>
                                                 <div hidden={orderList.Assign == 'false'}>
                                                     you were assigned You can Deliver Now
+
                                                 </div>
 
                                                 <div hidden={orderList.Assign == 'true'}>
