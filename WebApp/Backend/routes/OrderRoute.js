@@ -2,36 +2,26 @@ const router = require("express").Router();
 const Order = require("../models/Order")
 const Reply = require("../models/SupplierReplies")
 
-router.route("/create").post((req,res)=>{
+router.route("/create").post((req, res) => {
 
     const order = new Order(req.body);
 
-    order.save().then((data)=>{
-        res.json(data.items)
-    }).catch((err)=>{
+    order.save().then((data) => {
+        res.json(data)
+    }).catch((err) => {
         console.log(err)
     })
 });
 
 
-router.route('/readOder').get(async(req,res)=>{
+router.route('/readOder').get(async (req, res) => {
     await Order.find()
-    .then((order)=>{
-        res.json(order)
-    })
-    .catch(error=>{
-        res.status(500).send(error.message);
-    })
-})
-
-router.route('/readOneOder/:id').get(async(req,res)=>{
-    await Order.find({_id: req.params.id})
-    .then((order)=>{
-        res.json(order)
-    })
-    .catch(error=>{
-        res.status(500).send(error.message);
-    })
+        .then((order) => {
+            res.json(order)
+        })
+        .catch(error => {
+            res.status(500).send(error.message);
+        })
 })
 
 
@@ -41,11 +31,7 @@ router.route('/readOneOder/:id').get(async(req,res)=>{
 router.route('/approve/:id').put(async (req, res) => {
     const id = req.params.id
     let ChooseSuppliers = '';
-
-
-    console.log(req.body.AdminApproval)
-
-
+    
 
     await Order.findByIdAndUpdate(id, req.body)
         .then((response) => {
@@ -58,21 +44,18 @@ router.route('/approve/:id').put(async (req, res) => {
 
 //supplier reply
 
-                if(req.body.AdminApproval=='Approve'){
+                const reply = new Reply({
+                    "suppliers": ChooseSuppliers,
+                    "orders": id,
+                    "Message": 'empty'
 
-                    const reply = new Reply({
-                        "suppliers": ChooseSuppliers,
-                        "orders": id,
-                        "Message": 'empty'
+                });
 
-                    });
-
-                    reply.save().then((data) => {
-                        console.log("Order Received")
-                    }).catch((err) => {
-                        console.log(err)
-                    })
-                }
+                reply.save().then((data) => {
+                    console.log("Order Received")
+                }).catch((err) => {
+                    console.log(err)
+                })
 
 
             })
@@ -202,4 +185,6 @@ router.route("/delete/:id").delete(async(req,res)=>{
 
 
 
+
 module.exports = router;
+

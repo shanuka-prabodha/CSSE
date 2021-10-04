@@ -9,7 +9,7 @@ class TabbedNavBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return DefaultTabController(
       initialIndex: 0,
-      length: 4,
+      length: 5,
       child: Scaffold(
         appBar: AppBar(
           title: Center(
@@ -22,13 +22,23 @@ class TabbedNavBar extends StatelessWidget {
                 width: 100.0,
                 child: Center(
                   child: Text(
-                    "New",
+                    "Add",
                     style: TextStyle(
                       fontSize: 18.0,
                     ),
                   ),
                 ),
               ),
+              Container(
+                  width: 100.0,
+                  child: Center(
+                    child: Text(
+                      "New",
+                      style: TextStyle(
+                        fontSize: 18.0,
+                      ),
+                    ),
+                  )),
               Container(
                   width: 100.0,
                   child: Center(
@@ -71,6 +81,9 @@ class TabbedNavBar extends StatelessWidget {
             ),
             Center(
               child: PendingSection(),
+            ),
+            Center(
+              child: Text("Tab pending view"),
             ),
             Center(
               child: Text("Tab 3 view"),
