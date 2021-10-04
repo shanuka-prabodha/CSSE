@@ -86,7 +86,7 @@ const OderApprovedCard = ({post,approve})=>{
                 <div style={{ marginLeft: "30%", marginTop: "40px" , color:"white" , paddingLeft:"px"}}>
                 <Typography >
                 <label>Requested by  </label>
-                <label>Dinisuru</label>
+                <label>  Dinisuru</label>
                 </Typography>
 
                 <div style={{marginTop:'10%'}}>

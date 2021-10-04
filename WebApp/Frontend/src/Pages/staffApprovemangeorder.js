@@ -252,6 +252,10 @@ const eventposts = useSelector((state)=>state.orderReducer)
             </Typography>
 </div>)})}
 
+<Typography>
+                 Recommend Suppliers
+                </Typography>
+
 <Grid container justify ="space-between" spacing ={3}>
 
     <Grid item xs ={12} sm ={7} style = {{width:"fit-content"}}>
@@ -290,7 +294,7 @@ const eventposts = useSelector((state)=>state.orderReducer)
                             <TableCell align="center">Description</TableCell>
                             <TableCell align="center">Quantity</TableCell>
                             <TableCell align="center">Unit Price</TableCell>
-                            <TableCell align="center">Check Item</TableCell>
+                            
                         </TableRow>
                     </TableHead>
                     <TableBody>
