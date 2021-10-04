@@ -71,7 +71,7 @@ class _AddProductsState extends State<AddProducts> {
                   onPressed: () async {
                     String name = nameController.text;
                     int quentity = int.parse(quentityController.text);
-                    double price = double.parse(quentityController.text);
+                    double price = double.parse(priceController.text);
                     ProductModel? product =
                         await submitData(name, quentity, price);
                     setState(() {

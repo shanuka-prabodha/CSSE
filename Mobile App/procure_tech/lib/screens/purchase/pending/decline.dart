@@ -4,14 +4,14 @@ import 'package:flutter/material.dart';
 import 'accessories/card.dart';
 import 'package:http/http.dart' as http;
 
-class PendingSection extends StatefulWidget {
-  const PendingSection({Key? key}) : super(key: key);
+class DeclineSection extends StatefulWidget {
+  const DeclineSection({Key? key}) : super(key: key);
 
   @override
-  _PendingSectionState createState() => _PendingSectionState();
+  _DeclineSectionState createState() => _DeclineSectionState();
 }
 
-class _PendingSectionState extends State<PendingSection> {
+class _DeclineSectionState extends State<DeclineSection> {
   var _purchaseDetails = [];
 
   @override
@@ -23,7 +23,7 @@ class _PendingSectionState extends State<PendingSection> {
 
   void getPurchases() async {
     final response =
-        await http.get(Uri.parse('http://172.25.80.1:8020/order/pending'));
+        await http.get(Uri.parse('http://172.25.80.1:8020/order/decline'));
     final jsonData = jsonDecode(response.body) as List;
 
     setState(() {

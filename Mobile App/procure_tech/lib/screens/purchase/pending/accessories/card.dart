@@ -8,6 +8,7 @@ class CardComponent extends StatelessWidget {
   Widget build(BuildContext context) {
     String submitedDate = post['OrderDate'].toString();
     String deliveryDate = post['DeliveryDate'].toString();
+    String priority = post['Priority'].toString();
     int itemCount = post['items'].length;
     return Container(
       color: Colors.blue,
@@ -77,7 +78,7 @@ class CardComponent extends StatelessWidget {
                       OutlinedButton(
                         onPressed: () => {},
                         child: Text(
-                          "Kavishka",
+                          '$priority',
                           style: TextStyle(color: Colors.white),
                         ),
                       ),
