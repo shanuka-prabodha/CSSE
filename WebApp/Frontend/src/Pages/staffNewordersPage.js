@@ -18,6 +18,7 @@ const ManageOders =() =>{
 
     const location = useLocation();
     const approve = location.state.approvel
+    console.log(approve)
         const [currentId,setCurrentId] = useState(null);
         
 
@@ -86,7 +87,7 @@ const ManageOders =() =>{
                             <Grid item xs ={12} sm ={7}>
                                 
 
-                                <EventPosts setCurrentId ={setCurrentId}   />     
+                                <EventPosts approve ={approve}   />     
                             </Grid >
 
                         </Grid>

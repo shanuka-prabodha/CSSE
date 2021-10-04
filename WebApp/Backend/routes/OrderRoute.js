@@ -87,4 +87,104 @@ router.route('/find/:id').get(async (req, res) => {
 })
 
 
+router.route('/staffupdate/:id').put(async(req,res) =>{
+    let oderID = req.params.id;
+    const{ReferenceNo,ChooseSuppliers} = req.body;
+
+    console.log(oderID);
+
+    const udpateOder = {
+        ReferenceNo,
+        ChooseSuppliers,
+        PassedState:'Passed',
+        AdminApproval:"Pending"
+
+
+    }
+
+    const update = await Order.findByIdAndUpdate(oderID,udpateOder)
+    .then(()=>{
+        res.status(200).send({status:'Oder updated'})
+    })
+    .catch((err)=>{
+        console.log(err);
+        res.status(500).send({status:"error with update "})
+    })
+
+})
+
+
+
+
+router.route('/assign/:id').put(async (req, res) => {
+    const id = req.params.id
+
+    console.log(id)
+
+    await Order.findByIdAndUpdate(id, req.body)
+        .then((response) => {
+            // res.json(response.ChooseSuppliers)
+
+            })
+
+            res.json("Order sent")
+        .catch((error) => {
+            res.status(500).send({error: error.message})
+        })
+})
+
+
+
+router.route('/state/:id').put(async (req, res) => {
+    const id = req.params.id
+
+    console.log(id)
+
+    await Order.findByIdAndUpdate(id, req.body)
+        .then((response) => {
+            // res.json(response.ChooseSuppliers)
+
+        })
+
+    res.json("Order sent")
+        .catch((error) => {
+            res.status(500).send({error: error.message})
+        })
+})
+
+
+router.route('/readApprovelOder').get(async(req,res)=>{
+
+   let apporvel = req.query.id;
+   console.log(apporvel)
+    await Order.find({ AdminApproval :apporvel})
+    .then((order)=>{
+        res.json(order)
+    })
+    .catch(error=>{
+        res.status(500).send(error.message);
+    })
+})
+
+
+router.route("/delete/:id").delete(async(req,res)=>{
+    let orderID = req.params.id;
+    if(req.params && req.params.id){
+
+        await Order.findByIdAndDelete(orderID)
+
+        .then(data=>{
+             
+         res.status(200).send("order deleted successfully")
+     }) 
+     .catch(error=>{
+         res.status(500).send(error.message);
+     })
+    }
+});
+
+
+
+
 module.exports = router;
+
