@@ -9,5 +9,7 @@ void main() {
     expect(textField, findsOneWidget);
     await tester.enterText(textField, "Hello");
     expect(find.text("Hello"), findsOneWidget);
+    var dropdown = find.byType(DropdownButton);
+    expect(dropdown, findsOneWidget);
   });
 }
