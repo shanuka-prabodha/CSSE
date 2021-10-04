@@ -41,6 +41,12 @@ const StaffButtonBar = (props)=>{
             btnText:"Message",
             btnColor:"primary",
             onClick:props.messageClick
+        },
+
+        {
+            btnText:"Low cost orders",
+            btnColor:"primary",
+            onClick:props.lowcostClick
         }
     ];
 

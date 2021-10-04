@@ -108,7 +108,7 @@ const OderApprovedCard = ({post,approve})=>{
                     boxShadow:"0px 0px 6px rgba(0,0,0,0.5)",
                     backgroundColor: '#FA334E',
                     padding:"5px"
-                }}  hidden ={approve == 'Approve' ? true :false}>
+                }}  hidden ={approve == 'Approve' || approve == 'else'  ? true :false}>
                 <DeleteIcon fontSize = "default" style={{position:"absolute", top:"18%", left:"18%"}} />
                     
                 {handleClickOpen}
