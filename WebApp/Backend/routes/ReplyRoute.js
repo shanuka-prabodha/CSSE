@@ -35,27 +35,27 @@ router.route('/get-orders/:id').get(async (req, res) => {
 
             })
 
-
-            let items = '';
-            order.map((order) => {
-                // console.log(order)
-                Order.find({_id: order})
-                    .then((data) => {
-                        // res.status(200).send(data);
-                        data.map((data) => {
-                            // console.log(data.items)
-                            items = data.items
-                            // console.log(data.items)
-                            allItems = {data: data.items}
-                        })
-                        // console.log(allItems)
-                        // console.log(allItems)
-                        // res.status(200).send(items)
-                    })
-
-            })
-
-            console.log(allItems)
+            console.log(order)
+            // let items = '';
+            // order.map((order) => {
+            //     // console.log(order)
+            //     Order.find({_id: order})
+            //         .then((data) => {
+            //             // res.status(200).send(data);
+            //             data.map((data) => {
+            //                 // console.log(data.items)
+            //                 items = data.items
+            //                 // console.log(data.items)
+            //                 allItems = {data: data.items}
+            //             })
+            //             // console.log(allItems)
+            //             // console.log(allItems)
+            //             // res.status(200).send(items)
+            //         })
+            //
+            // })
+            //
+            // console.log(allItems)
             // res.status(200).send({data:allItems})
             // res.json({data:allItems})
 
