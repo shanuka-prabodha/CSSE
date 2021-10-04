@@ -159,9 +159,12 @@ const eventposts = useSelector((state)=>state.orderReducer)
 
 
     return (
+
         <Box sx={{ minWidth: 275 }}>
             (
     <React.Fragment>
+
+
         <CardContent>
             <Row style={{ paddingLeft: "2%", paddingBottom: "10px", fontSize: "30px", fontWeight: "bold" }}>Purchase order for requistion</Row>
             <Row style={{ paddingLeft: "2%" }}>
@@ -321,5 +324,7 @@ const eventposts = useSelector((state)=>state.orderReducer)
 
     </React.Fragment>
         </Box>
+
+
     );
 }

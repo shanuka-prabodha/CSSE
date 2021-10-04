@@ -12,6 +12,7 @@ import axios from "axios";
 import AssignSupplier from "./AssignSupplier";
 import Button from "@material-ui/core/Button";
 import SupplierName from "../Supplier/SupplierName";
+import {TextareaAutosize} from "@material-ui/core";
 
 const StyledTableCell = withStyles((theme) => ({
     head: {
@@ -92,6 +93,9 @@ let index=0;
 
 
     return (
+
+        <div className='heroSection'>
+
         <div className='container mt-lg-4' align="center">
 
             {/*{count}*/}
@@ -138,8 +142,8 @@ let index=0;
 
 
                                         <TableCell hidden={replyList.Message == 'empty'}>
-                                        <textarea hidden={replyList.Message == 'empty'}
-                                                  style={{width: '350px', height: '50px'}} value={replyList.Message}/>
+                                        <TextareaAutosize auto hidden={replyList.Message == 'empty'}
+                                                  style={{width: '350px'}} value={replyList.Message}/>
                                             {/*<textarea hidden={replyList.Message!='empty'} style={{width: '350px', height: '50px'}} value={"No reply yet"}/>*/}
                                         </TableCell>
 
@@ -178,6 +182,7 @@ let index=0;
                     </TableBody>
                 </Table>
             </TableContainer>
+        </div>
         </div>
 )
 }
